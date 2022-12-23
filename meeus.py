@@ -62,8 +62,7 @@ class Waktu:
     def time_dec(self):
         return (self.jam + self.menit/60 + self.detik/3600 + self.timezone)/24
 
-
-class DataMatahari:
+class DetailPerhitungan:
     def __init__(self, tahun, bulan, hari, jam, menit, detik, timezone):
         self.tahun = tahun
         self.bulan = bulan
@@ -104,9 +103,10 @@ class DataMatahari:
         _delta_psi       = _delta_psi_total/3600
         _gst_nampak      = _gst + _delta_psi * math.cos(_epsilon)/15
         _lst_nampak      = (_gst_nampak + bandung.bujur()/15) % 24
-        
-        print(f'GST Tampak: {to_dms(_gst_nampak)}')
-        print(f'LST Tampak: {to_dms(_lst_nampak)}')
+
+
+class DataMatahari:
+    pass
 
 
 class DataBulan:
@@ -118,4 +118,4 @@ bandung = Koordinat(6,57,0,"LS", 107, 37,0,"BT")
 #tgl = Tanggal(14, 7, 2016)   
 tgl = Tanggal(14, 10, 2022)   
 pukul = Waktu(9,0,0,7)
-data_matahari = DataMatahari(tgl.tahun, tgl.bulan, tgl.hari, pukul.jam, pukul.menit, pukul.detik, pukul.timezone)
+detail_perhitungan = DetailPerhitungan(tgl.tahun, tgl.bulan, tgl.hari, pukul.jam, pukul.menit, pukul.detik, pukul.timezone)
