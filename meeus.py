@@ -2,6 +2,7 @@ import math
 from typing import Self
 from main import *
 from delta_t_meeus import *
+from nutasi_meeus import *
 
 class Koordinat:
     def __init__(self, lat_deg, lat_min, lat_sec, lat, lon_deg, lon_min, lon_sec, lon):
@@ -94,10 +95,7 @@ class DataMatahari:
         t_td    = (jde - 2451545)/36525
         tau     = t_td/10
         gst     = ((280.46061837 + 360.98564736629*(jd_ut - 2451545) + 0.000387933*t_ut**2 - t_ut**3/38710000) % 360)/15
-        
-
-
-        print(to_dms(gst))
+        delta_e= delta_epsilon(t_td)
 
 
 class DataBulan:
