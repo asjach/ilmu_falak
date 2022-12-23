@@ -72,5 +72,5 @@ def delta_epsilon(t_td):
     for i in range(len(de_array)):
             result += (de_array[i][5] + de_array[i][6]*t) * math.cos(de_array[i][0] * d + de_array[i][1] * m + de_array[i][2] * m_aksen + de_array[i][3] * f + de_array[i][4] * omega)
 
-    print(result)
     return result
+    

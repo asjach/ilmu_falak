@@ -108,17 +108,4 @@ tgl = Tanggal(14, 10, 2022)
 pukul = Waktu(9,0,0,7)
 data_matahari = DataMatahari(tgl.tahun, tgl.bulan, tgl.hari, pukul.jam, pukul.menit, pukul.detik, pukul.timezone)
 
-
-
-
-
-
-
-
 # bandung.cetak_koordinat()
-
-
-    
-        
-        
-

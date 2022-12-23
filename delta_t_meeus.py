@@ -78,5 +78,3 @@ def delta_t(tahun_desimal):
         delta = -20 + 32*((tahun_desimal - 1820)/100)*((tahun_desimal - 1820)/100)
 
     return delta
-
-
