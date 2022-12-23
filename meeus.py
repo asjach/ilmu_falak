@@ -2,7 +2,7 @@ import math
 from typing import Self
 from main import *
 from delta_t_meeus import *
-from nutasi_meeus import *
+from obliquity_meeus import *
 
 class Koordinat:
     def __init__(self, lat_deg, lat_min, lat_sec, lat, lon_deg, lon_min, lon_sec, lon):
@@ -73,29 +73,38 @@ class DataMatahari:
         self.detik = detik
         self.timezone = timezone
 
-        m = self.bulan + 12 if self.bulan < 3 else self.bulan
-        y = self.tahun - 1 if self.bulan < 3 else self.tahun
-        a = int(y/100)
+        _m = self.bulan + 12 if self.bulan < 3 else self.bulan
+        _y = self.tahun - 1 if self.bulan < 3 else self.tahun
+        _a = int(_y/100)
         if self.tahun < 1583:
             if self.bulan < 11:
                 if self.hari < 4:
                     b = 0
                     if self.hari > 14:
-                        b = 2 + int(a/4)-a
+                        b = 2 + int(_a/4)-_a
                     else:
                         print("tanggal salah")
             else:
-                b = 2 + int(a/4)-a
+                b = 2 + int(_a/4)-_a
         else:
-            b   = 2 + int(a/4) - a
-        jd_ut   = 1720994.5 + int(365.25 * y) + int(30.60001 * (m + 1)) + b + self.hari + (self.jam + self.menit/60 + self.detik/3600)/24 - self.timezone/24
-        t_ut    = (jd_ut-2451545)/36525
-        delta   = delta_t(tgl.tahun_desimal)
-        jde     = jd_ut + delta/86400
-        t_td    = (jde - 2451545)/36525
-        tau     = t_td/10
-        gst     = ((280.46061837 + 360.98564736629*(jd_ut - 2451545) + 0.000387933*t_ut**2 - t_ut**3/38710000) % 360)/15
-        delta_e= delta_epsilon(t_td)
+            b   = 2 + int(_a/4) - _a
+        jd_ut           = 1720994.5 + int(365.25 * _y) + int(30.60001 * (_m + 1)) + b + self.hari + (self.jam + self.menit/60 + self.detik/3600)/24 - self.timezone/24
+        _t_ut            = (jd_ut-2451545)/36525
+        _delta           = delta_t(tgl.tahun_desimal)
+        _jde             = jd_ut + _delta/86400
+        _t_td            = (_jde - 2451545)/36525
+        _tau             = _t_td/10
+        _gst             = ((280.46061837 + 360.98564736629*(jd_ut - 2451545) + 0.000387933*_t_ut**2 - _t_ut**3/38710000) % 360)/15
+        _delta_e         = delta_epsilon_total(_t_td)
+        _u               = u(_t_td)
+        _epsilon_z       = epsilon_zero(_u)
+        _delta_e_total   = delta_epsilon_total(_t_td)/10000
+        _epsilon         = math.radians(epsilon(_epsilon_z, _delta_e_total))
+        _delta_psi      = None
+        #_gst_tampak      = _gst + 
+
+        
+        print(_epsilon)
 
 
 class DataBulan:
@@ -108,5 +117,3 @@ bandung = Koordinat(6,57,0,"LS", 107, 37,0,"BT")
 tgl = Tanggal(14, 10, 2022)   
 pukul = Waktu(9,0,0,7)
 data_matahari = DataMatahari(tgl.tahun, tgl.bulan, tgl.hari, pukul.jam, pukul.menit, pukul.detik, pukul.timezone)
-
-# bandung.cetak_koordinat()
