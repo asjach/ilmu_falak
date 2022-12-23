@@ -100,6 +100,7 @@ class DataMatahari:
 
 class DataBulan:
     pass
+#test
 
 
 bandung = Koordinat(6,57,0,"LS", 107, 37,0,"BT")
