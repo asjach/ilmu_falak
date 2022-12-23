@@ -3,6 +3,7 @@ from typing import Self
 from main import *
 from delta_t_meeus import *
 from obliquity_nutasi_meeus import *
+from bulan import *
 
 class Koordinat:
     def __init__(self, lat_deg, lat_min, lat_sec, lat, lon_deg, lon_min, lon_sec, lon):
@@ -111,20 +112,11 @@ class DataMatahari:
 class DataBulan:
     def __init__ (self, t_td):
         self.t_td       = t_td
-        l_aksen         = (218.3164591 + 481267.88134236*self.t_td - 0.0013268*self.t_td*self.t_td + self.t_td*self.t_td*self.t_td/538841 - self.t_td*self.t_td*self.t_td*self.t_td/65194000) % 360
-        print(l_aksen)
-        koreksi_bujur_bulan = 0
+        koreksi_bujur_bulan = koreksi_bulan(t_td)
+        koreksi_bulan(self.t_td)
 
 
-
-
-            
-
-#test
-
-
-bandung = Koordinat(6,57,0,"LS", 107, 37,0,"BT")
-#tgl = Tanggal(14, 7, 2016)   
+bandung = Koordinat(6,57,0,"LS", 107, 37,0,"BT")  
 tgl = Tanggal(14, 10, 2022)   
 pukul = Waktu(9,0,0,7)
 calc = DetailPerhitungan(tgl.tahun, tgl.bulan, tgl.hari, pukul.jam, pukul.menit, pukul.detik, pukul.timezone)
