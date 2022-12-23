@@ -1,5 +1,6 @@
 import math
 from datalist import delta_epsilon as de
+from datalist import delta_psi as dp
 
 
 def u(t_td):
@@ -27,3 +28,19 @@ def delta_epsilon_total(t_td):
 
 def epsilon(epsilon_zero, delta_epsilon_total):
     return epsilon_zero + delta_epsilon_total/3600
+
+
+def delta_psi_total(t_td):
+    t = t_td
+    d = math.radians((297.85036 + 445267.11148*t - 0.0019142*t**2 + t**3/189474) % 360)
+    m = math.radians((357.52772 + 35999.05034*t - 0.0001603*t*t - t*t*t/300000) % 360)
+    m_aksen = math.radians((134.96298 + 477198.867398*t + 0.0086972*t*t + t*t*t/56250) % 360)
+    f = math.radians((93.27191 + 483202.017538*t - 0.0036825*t*t + t*t*t/327270) % 360)
+    omega = math.radians((125.04452 - 1934.136261*t + 0.0020708*t*t + t*t*t/450000) % 360)
+    total = 0
+    for i in range(len(dp)):
+            total += (dp[i][5] + dp[i][6]*t) * math.sin(dp[i][0] * d + dp[i][1] * m + dp[i][2] * m_aksen + dp[i][3] * f + dp[i][4] * omega)
+    return total/10000
+
+def delta_psi(delta_psi_total):
+    delta_psi_total/3600

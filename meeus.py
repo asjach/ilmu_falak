@@ -2,7 +2,7 @@ import math
 from typing import Self
 from main import *
 from delta_t_meeus import *
-from obliquity_meeus import *
+from obliquity_nutasi_meeus import *
 
 class Koordinat:
     def __init__(self, lat_deg, lat_min, lat_sec, lat, lon_deg, lon_min, lon_sec, lon):
@@ -88,7 +88,7 @@ class DataMatahari:
                 b = 2 + int(_a/4)-_a
         else:
             b   = 2 + int(_a/4) - _a
-        jd_ut           = 1720994.5 + int(365.25 * _y) + int(30.60001 * (_m + 1)) + b + self.hari + (self.jam + self.menit/60 + self.detik/3600)/24 - self.timezone/24
+        jd_ut            = 1720994.5 + int(365.25 * _y) + int(30.60001 * (_m + 1)) + b + self.hari + (self.jam + self.menit/60 + self.detik/3600)/24 - self.timezone/24
         _t_ut            = (jd_ut-2451545)/36525
         _delta           = delta_t(tgl.tahun_desimal)
         _jde             = jd_ut + _delta/86400
@@ -100,11 +100,13 @@ class DataMatahari:
         _epsilon_z       = epsilon_zero(_u)
         _delta_e_total   = delta_epsilon_total(_t_td)/10000
         _epsilon         = math.radians(epsilon(_epsilon_z, _delta_e_total))
-        _delta_psi      = None
-        #_gst_tampak      = _gst + 
-
+        _delta_psi_total = delta_psi_total(_t_td)
+        _delta_psi       = _delta_psi_total/3600
+        _gst_nampak      = _gst + _delta_psi * math.cos(_epsilon)/15
+        _lst_nampak      = (_gst_nampak + bandung.bujur()/15) % 24
         
-        print(_epsilon)
+        print(f'GST Tampak: {to_dms(_gst_nampak)}')
+        print(f'LST Tampak: {to_dms(_lst_nampak)}')
 
 
 class DataBulan:
