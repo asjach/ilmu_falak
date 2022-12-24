@@ -1,6 +1,6 @@
 import math
 from typing import Self
-from main import *
+from fungsi_bantu import *
 from delta_t_meeus import *
 from obliquity_nutasi_meeus import *
 from bulan import *
@@ -110,16 +110,32 @@ class DataMatahari:
 
 
 class DataBulan:
-    def __init__ (self, t_td):
-        self.t_td       = t_td
-        koreksi_bujur_bulan = koreksi_bulan(t_td)
-        koreksi_bulan(self.t_td)
+    def __init__ (self):
+        pass
+    bujur_rata_rata_bulan = 0
+    koreksi_bujur_bulan = 0
+    bujur_bulan = 0
+    nutasi = 0
+    bujur_bulan_nampak =0
+    lintang_bulan = 0
+    jarak_bumi_bulan = 0
+    sudut_parallaks = 0
+    alpha = 0
+    delta = 0
+    hour_angle = 0
+    azimut_south = 0
+    azimut = 0
+    altitude = 0
+    sudut_fai = 0
+    sudut_fase = 0
+    illuminasi = 0
+
 
 
 bandung = Koordinat(6,57,0,"LS", 107, 37,0,"BT")  
 tgl = Tanggal(14, 10, 2022)   
 pukul = Waktu(9,0,0,7)
 calc = DetailPerhitungan(tgl.tahun, tgl.bulan, tgl.hari, pukul.jam, pukul.menit, pukul.detik, pukul.timezone)
-bulan =DataBulan(calc.t_td)
+bulan =DataBulan()
 
 #print(to_dms(xxxxx))
