@@ -1,6 +1,6 @@
 import math
-from main import *
-from konstanta import *
+from temporary.main import *
+from temporary.konstanta import *
 
 #  ========== Pendekatan Cooper ==========
 # http://soal-olim-astro.blogspot.com/2013/06/mencari-deklinasi-matahari.html

@@ -1,6 +1,6 @@
 import math
-from datalist import delta_epsilon as de
-from datalist import delta_psi as dp
+from temporary.datalist import delta_epsilon as de
+from temporary.datalist import delta_psi as dp
 
 
 def u(t_td):

@@ -1,8 +1,8 @@
 import math
-from datalist import koreksi_bujur_bulan as kb
-from datalist import koreksi_lintang_bulan as kl
-from datalist import koreksi_jarak_bumi_bulan as kj
-from meeus import *
+from temporary.datalist import koreksi_bujur_bulan as kb
+from temporary.datalist import koreksi_lintang_bulan as kl
+from temporary.datalist import koreksi_jarak_bumi_bulan as kj
+from temporary.meeus import *
 
 # def L(calc.T):
 #     return math.radians((218.3164591 + 481267.88134236*t_td - 0.0013268*t_td*t_td + t_td*t_td*t_td/538841 - t_td*t_td*t_td*t_td/65194000) % 360)

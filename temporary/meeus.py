@@ -1,9 +1,9 @@
 import math
 from typing import Self
 from fungsi_bantu import *
-from delta_t_meeus import *
-from obliquity_nutasi_meeus import *
-from bulan import *
+from temporary.delta_t_meeus import *
+from temporary.obliquity_nutasi_meeus import *
+from temporary.bulan import *
 
 class Koordinat:
     def __init__(self, lat_deg, lat_min, lat_sec, lat, lon_deg, lon_min, lon_sec, lon):
