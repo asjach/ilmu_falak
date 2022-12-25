@@ -1,10 +1,10 @@
 from math import *
-from functions.utilities import *
-from functions.calcutation import *
+from utilities import *
+from calcutation import *
 from place import Place
 #from functions.nutation import Nutation
-from functions.moon import *
-from functions.nutation import *
+from moon import *
+from nutation import *
 
 class DateTime:
     def __init__ (self, year, month, day, hour=0, minute=0, second=0, timezone=0, longitude=0):

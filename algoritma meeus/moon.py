@@ -1,6 +1,6 @@
 from math import radians, sin, cos, tan, asin, atan2, degrees
-from functions.nutation import *
-#from main import waktu
+from nutation import *
+from main import waktu
 
 
 class Moon:
@@ -13,7 +13,7 @@ class Moon:
         self.f       = radians((93.2720993 + 483202.0175273*T - 0.0034029*T*T - T*T*T/3526000 + T*T*T*T/863310000) % 360)
         self.eksentrisitas_orbit = 1 - 0.002516*T - 0.0000074*T*T
         self.nutasi    = Nutation(self.t_td)
-        #self.lst        = waktu.LST_nampak
+        self.lst        = waktu.LST_nampak
         #sefl.lst_nampak = 
         self.koreksi_delta_psi  = self.nutasi.delta_psi_total/3600
 

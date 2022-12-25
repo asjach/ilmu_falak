@@ -1,6 +1,6 @@
 
 from math import radians
-from functions.utilities import *
+from utilities import *
 class Place:
     def __init__(self, lat_deg, lat_min, lat_sec, lat_direction, lon_deg, lon_min, lon_sec, lon_direction):
         self._lat_deg = lat_deg
