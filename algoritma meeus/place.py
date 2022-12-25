@@ -2,20 +2,26 @@
 from math import radians
 from utilities import *
 class Place:
-    def __init__(self, lat_deg, lat_min, lat_sec, lat_direction, lon_deg, lon_min, lon_sec, lon_direction):
+    def __init__(self, nama_lokasi, lat_deg, lat_min, lat_sec, lat_direction, lon_deg, lon_min, lon_sec, lon_direction):
+        self.nama_lokasi = nama_lokasi
         self._lat_deg = lat_deg
         self._lat_min = lat_min
         self._lat_sec = lat_sec
-        self._lat = lat_direction
+        self._lat_direction = lat_direction
         self._lon_deg = lon_deg
         self._lon_min = lon_min
         self._lon_sec = lon_sec
-        self._lon = lon_direction
+        self._lon_direction = lon_direction
     
 
     @property
+    def koordinat(self):
+        _koordinat = f'{self._lat_deg}°{self._lat_min}\'{self._lat_sec}\" {self._lat_direction} {self._lon_deg}°{self._lon_min}\'{self._lon_sec}\" {self._lon_direction}'
+        return _koordinat
+
+    @property
     def latitude_dec(self):
-        if self._lat == "N" or self._lat == "LU":
+        if self._lat_direction == "N" or self._lat_direction == "LU":
             return self._lat_deg + self._lat_min/60 + self._lat_sec/3600
         return (self._lat_deg + self._lat_min/60 + self._lat_sec/3600) * (-1)
     
@@ -32,7 +38,7 @@ class Place:
 
     @property
     def longitude_dec(self):
-        if self._lon == "E" or self._lon == "BT":
+        if self._lon_direction == "E" or self._lon_direction == "BT":
             return self._lon_deg + self._lon_min/60 + self._lon_sec/3600
         return (self._lon_deg + self._lon_min/60 + self._lon_sec/3600) * (-1)
 

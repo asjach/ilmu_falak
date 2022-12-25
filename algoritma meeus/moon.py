@@ -1,21 +1,21 @@
-from math import radians, sin, cos, tan, asin, atan2, degrees
+from math import radians, sin, cos, tan, asin, acos, atan2, degrees
 from nutation import *
-from main import waktu
+
 
 
 class Moon:
-    def __init__(self, t_td) -> None:
+    def __init__(self, t_td, lst_nampak, latitude) -> None:
         self.t_td = t_td
         T = t_td
-        self.d       = radians((297.8502042 + 445267.1115168*T - 0.00163*T*T + T*T*T/545868 - T*T*T*T/113065000) % 360)
-        self.m       = radians((357.5291092 + 35999.0502909*T - 0.0001536*T*T + T*T*T/24490000) % 360)
-        self.m_aksen = radians((134.9634114 + 477198.8676313*T + 0.008997*T*T + T*T*T/69699 - T*T*T*T/14712000) % 360)
-        self.f       = radians((93.2720993 + 483202.0175273*T - 0.0034029*T*T - T*T*T/3526000 + T*T*T*T/863310000) % 360)
-        self.eksentrisitas_orbit = 1 - 0.002516*T - 0.0000074*T*T
-        self.nutasi    = Nutation(self.t_td)
-        self.lst        = waktu.LST_nampak
-        #sefl.lst_nampak = 
-        self.koreksi_delta_psi  = self.nutasi.delta_psi_total/3600
+        self.d                      = radians((297.8502042 + 445267.1115168*T - 0.00163*T*T + T*T*T/545868 - T*T*T*T/113065000) % 360)
+        self.m                      = radians((357.5291092 + 35999.0502909*T - 0.0001536*T*T + T*T*T/24490000) % 360)
+        self.m_aksen                = radians((134.9634114 + 477198.8676313*T + 0.008997*T*T + T*T*T/69699 - T*T*T*T/14712000) % 360)
+        self.f                      = radians((93.2720993 + 483202.0175273*T - 0.0034029*T*T - T*T*T/3526000 + T*T*T*T/863310000) % 360)
+        self.eksentrisitas_orbit    = 1 - 0.002516*T - 0.0000074*T*T
+        self.nutasi                 = Nutation(self.t_td)
+        self.koreksi_delta_psi      = self.nutasi.delta_psi_total/3600
+        self.lst_nampak             = lst_nampak
+        self.latitude               = latitude                          
 
         #Argument
         self.a1 = radians((119.75 + 131.849 * T) % 360)
@@ -137,8 +137,44 @@ class Moon:
 
     @property
     def hour_angle(self):
-        return self.lst * 15 - self.alpha
+        return self.lst_nampak * 15 - self.alpha
 
+
+    @property
+    def azimut_selatan(self):
+        y = sin(radians(self.hour_angle))
+        x = cos(radians(self.hour_angle))*sin(radians(self.latitude))-tan(radians(self.delta))*cos(radians(self.latitude))
+        return degrees(atan2(y, x))
+
+
+    @property
+    def azimut_bulan(self):
+        return (self.azimut_selatan + 180) % 360
+
+
+    @property
+    def altitude(self):
+        lat = radians(self.latitude)
+        delta = radians(self.delta)
+        ha = radians(self.hour_angle)
+        return degrees(asin(sin(lat)*sin(delta)+cos(lat)*cos(delta)*cos(ha)))
+
+
+    @property
+    def sudut_fai(self):
+        delta_b = radians(self.delta)
+        delta_m = 00000000000000000000000000000000000000
+        return acos(sin(delta_b)*sin(delta_m) + cos(delta_b)*cos(delta_m)*cos(delta_b-delta_m))
+
+
+    @property
+    def sudut_fase(self):
+        pass
+
+
+    @property
+    def illuminasi(self):
+        pass
 
 
 
