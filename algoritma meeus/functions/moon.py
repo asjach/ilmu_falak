@@ -1,4 +1,7 @@
-from math import radians, sin, cos
+from math import radians, sin, cos, tan, asin, atan2, degrees
+from functions.nutation import *
+#from main import waktu
+
 
 class Moon:
     def __init__(self, t_td) -> None:
@@ -9,18 +12,34 @@ class Moon:
         self.m_aksen = radians((134.9634114 + 477198.8676313*T + 0.008997*T*T + T*T*T/69699 - T*T*T*T/14712000) % 360)
         self.f       = radians((93.2720993 + 483202.0175273*T - 0.0034029*T*T - T*T*T/3526000 + T*T*T*T/863310000) % 360)
         self.eksentrisitas_orbit = 1 - 0.002516*T - 0.0000074*T*T
+        self.nutasi    = Nutation(self.t_td)
+        #self.lst        = waktu.LST_nampak
+        #sefl.lst_nampak = 
+        self.koreksi_delta_psi  = self.nutasi.delta_psi_total/3600
 
         #Argument
         self.a1 = radians((119.75 + 131.849 * T) % 360)
         self.a2 = radians((53.09 + 479264.29 * T) % 360)
         self.a3 = radians((313.45 + 481266.484 * T) % 360)
 
-    
+
     @property
     def bujur_rata_rata_bulan(self):
         t = self.t_td
         hasil = radians((218.3164591 + 481267.88134236*t - 0.0013268*t*t + t*t*t/538841 - t*t*t*t/65194000) % 360)
         return hasil
+
+
+    @property
+    def bujur_bulan(self):
+        
+        return (degrees(self.bujur_rata_rata_bulan) + self.koreksi_bujur_bulan)%360
+
+
+    @property
+    def bujur_bulan_nampak(self):
+        return radians((self.bujur_bulan + self.koreksi_delta_psi) % 360)
+
 
     @property
     def koreksi_bujur_bulan(self):
@@ -45,12 +64,13 @@ class Moon:
         return total
 
     @property
-    def koreksi_lintang_bulan(self):
+    def lintang_bulan(self):
         m_aksen = self.m_aksen
         f = self.f
         L = self.bujur_rata_rata_bulan
         hasil = (self.total_koreksi_lintang_bulan - 2235 * sin(L) + 382*sin(self.a3) + 175*sin(self.a1 - f) + 175*sin(self.a1 + f) + 127*sin(L - m_aksen) - 115*sin(L + m_aksen))/1000000
-        return hasil
+        return radians(hasil)
+
 
     @property
     def total_koreksi_lintang_bulan(self):
@@ -84,6 +104,42 @@ class Moon:
     def koreksi_jarak_bumi_bulan(self):
         hasil = self.total_koreksi_jarak_bumi_bulan / 1000
         return hasil
+
+
+    @property
+    def jarak_bumi_bulan(self):
+        return 385000.56+self.koreksi_jarak_bumi_bulan
+
+
+    @property
+    def sudut_parallaks(self):
+        return degrees(asin(6378.14/self.jarak_bumi_bulan))
+
+
+    @property
+    def sudut_jari_jari_bulan(self):
+        return 358473400/(self.jarak_bumi_bulan*3600)
+
+
+    @property
+    def alpha(self):
+        x_num = cos(self.bujur_bulan_nampak)
+        y_num = sin(self.bujur_bulan_nampak) * cos(self.nutasi.epsilon) - tan(self.lintang_bulan) * sin(self.nutasi.epsilon)
+        hasil = (degrees(atan2(y_num, x_num))) % 360
+        #hasil = ((atan2(y_num, x_num))) % 360
+        return hasil
+
+
+    @property
+    def delta(self):
+        hasil =degrees(asin(sin(self.lintang_bulan)*cos(self.nutasi.epsilon)+cos(self.lintang_bulan)*sin(self.nutasi.epsilon)*sin(self.bujur_bulan_nampak)))
+        return hasil
+
+    @property
+    def hour_angle(self):
+        return self.lst * 15 - self.alpha
+
+
 
 
 list_koreksi_bujur_bulan = [
