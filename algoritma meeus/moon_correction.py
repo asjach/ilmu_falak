@@ -1,4 +1,5 @@
 from math import radians, sin, cos
+from correction_datalist import *
 
 
 class MoonCorrection:

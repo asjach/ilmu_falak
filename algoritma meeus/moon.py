@@ -1,6 +1,7 @@
 from math import radians, sin, cos, tan, asin, acos, atan2, degrees
 from nutation import *
-#from sun import *
+from moon_correction import MoonCorrection
+from sun import *
 
 
 class Moon:
@@ -8,6 +9,11 @@ class Moon:
         self.t_td = t_td
         T = t_td
         self.nutasi                 = Nutation(t_td)
+        koreksi_bulan               = MoonCorrection(t_td)
+        self.bujur_rata_rata_bulan  = koreksi_bulan.L_aksen
+        self.koreksi_bujur_bulan    = koreksi_bulan.koreksi_bujur_bulan
+        self.lintang_bulan          = koreksi_bulan.lintang_bulan
+        self.jarak_bumi_bulan       = koreksi_bulan.jarak_bumi_bulan
         self.delta_psi              = self.nutasi.delta_psi
         self.lst_nampak             = lst_nampak
         self.latitude               = latitude
@@ -92,4 +98,3 @@ class Moon:
     @property
     def illuminasi(self):
         pass
-    
