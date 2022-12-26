@@ -1,10 +1,10 @@
 from math import radians, sin, cos, tan, asin, acos, atan2, degrees
 from nutation import *
-
+#from sun import *
 
 
 class Moon:
-    def __init__(self, t_td, lst_nampak, latitude) -> None:
+    def __init__(self, t_td, lst_nampak, latitude, a_matahari, d_matahari):
         self.t_td = t_td
         T = t_td
         self.d                      = radians((297.8502042 + 445267.1115168*T - 0.00163*T*T + T*T*T/545868 - T*T*T*T/113065000) % 360)
@@ -12,10 +12,12 @@ class Moon:
         self.m_aksen                = radians((134.9634114 + 477198.8676313*T + 0.008997*T*T + T*T*T/69699 - T*T*T*T/14712000) % 360)
         self.f                      = radians((93.2720993 + 483202.0175273*T - 0.0034029*T*T - T*T*T/3526000 + T*T*T*T/863310000) % 360)
         self.eksentrisitas_orbit    = 1 - 0.002516*T - 0.0000074*T*T
-        self.nutasi                 = Nutation(self.t_td)
-        self.koreksi_delta_psi      = self.nutasi.delta_psi_total/3600
+        self.nutasi                 = Nutation(t_td)
+        self.delta_psi              = self.nutasi.delta_psi
         self.lst_nampak             = lst_nampak
-        self.latitude               = latitude                          
+        self.latitude               = latitude
+        self.a_matahari             = a_matahari
+        self.d_matahari             = d_matahari                    
 
         #Argument
         self.a1 = radians((119.75 + 131.849 * T) % 360)
@@ -38,7 +40,7 @@ class Moon:
 
     @property
     def bujur_bulan_nampak(self):
-        return radians((self.bujur_bulan + self.koreksi_delta_psi) % 360)
+        return radians((self.bujur_bulan + self.delta_psi) % 360)
 
 
     @property
@@ -163,8 +165,10 @@ class Moon:
     @property
     def sudut_fai(self):
         delta_b = radians(self.delta)
-        delta_m = 00000000000000000000000000000000000000
-        return acos(sin(delta_b)*sin(delta_m) + cos(delta_b)*cos(delta_m)*cos(delta_b-delta_m))
+        delta_m = (self.d_matahari)
+        alpha_b = radians(self.alpha)
+        alpha_m = radians(self.a_matahari)
+        return acos(sin(delta_b)*sin(delta_m) + cos(delta_b)*cos(delta_m)*cos(alpha_b-alpha_m))
 
 
     @property

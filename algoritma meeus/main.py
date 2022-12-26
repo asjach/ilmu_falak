@@ -4,6 +4,7 @@ from calcutation import *
 from place import Place
 #from functions.nutation import Nutation
 from moon import *
+from sun import *
 from nutation import *
 from delta_t import delta_T
 
@@ -79,12 +80,6 @@ class KonversiWaktu:
         
         return 1720994.5 + int(365.25 * y) + int(30.60001 * (m + 1)) + b + self.day + (self.hour + self.minute/60 + self.second/3600)/24 - self.timezone/24
 
-    
-
-
-
-
-
 
 lokasi1 = Place("Bandung", 6,57,0,"LS", 107, 37,0,"BT")
 #waktu = DateTime(2022, 12, 14, 0, 0, 0,7, lokasi1.longitude_dec)
@@ -93,7 +88,9 @@ lokasi1 = Place("Bandung", 6,57,0,"LS", 107, 37,0,"BT")
 tanggal = Tanggal(2022,12,14)
 waktu = Waktu(14, 0, 0, 7)
 T = KonversiWaktu(tanggal.year, tanggal.month, tanggal.day, waktu.hour, waktu.minute, waktu.second, waktu.timezone, lokasi1.longitude_dec)
-data_bulan = Moon(T.T_td, T.LST_nampak, lokasi1.latitude_dec)
+data_matahari = Sun(T.T_td, T.LST_nampak, lokasi1.latitude_dec)
+data_bulan = Moon(T.T_td, T.LST_nampak, lokasi1.latitude_dec, data_matahari.alpha_matahari, data_matahari.delta_matahari)
+
 
 print(f"""
 Data Bulan
@@ -102,7 +99,7 @@ Bujur rata-rata bulan   : {degrees(data_bulan.bujur_rata_rata_bulan)}°
                         : {data_bulan.bujur_rata_rata_bulan} rads                         
 Koreksi bujur bulan     : {data_bulan.koreksi_bujur_bulan} rads
 Bujur Bulan             : {data_bulan.bujur_bulan}° 
-Koreksi Delta Psi       : {data_bulan.koreksi_delta_psi}°
+Koreksi Delta Psi       : {data_bulan.delta_psi}°
 Bujur Bulan Nammpak     : {data_bulan.bujur_bulan_nampak}°
 
 Lintang Bulan           : {data_bulan.lintang_bulan}°
@@ -121,6 +118,20 @@ Illuminasi Bulan        : {data_bulan.illuminasi}°
 
 DATA MATAHARI
 Theta_terkoreksi        : {data_matahari.theta_terkoreksi}°
+Delta Psi               : {data_matahari.delta_psi}°
+Koreksi aberasi         : {data_matahari.koreksi_aberasi}
+Bujur matahari nampak   : {data_matahari.bujur_matahari_nampak}
+Lintang matahari nampak : {data_matahari.lintang_matahari_tampak}
+Jarak bumi-matahari =   : {data_matahari.jarak_bumi_matahari} ({data_matahari.jarak_bumi_matahari*149598000}km)
+Sudut jari-jari matahari: {data_matahari.sudut_jari_jari_matahari}
+Alpha                   : {data_matahari.alpha_matahari}
+Delta                   : {data_matahari.delta_matahari}
+Hour Angle              : {data_matahari.hour_angle_matahari}
+Azimuth dari selatan    : {data_matahari.azimut_selatan}
+Azimuth                 : {data_matahari.azimut_matahari}
+Altitude                : {data_matahari.altitude}
+Sudut paralaks matahari : {data_matahari.sudut_parallaks_matahari}
+
 """)
 
 
