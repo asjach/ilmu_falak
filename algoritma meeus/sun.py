@@ -5,23 +5,23 @@ from sun_correction import SunCorrection
 
 class Sun:
     def __init__(self, t_td, lst_nampak, latitude):
-        self.t              = t_td
-        self.tau            = t_td/10
+        self.t                          = t_td
+        self.tau                        = t_td/10
         
-        self.nutasi         = Nutation(t_td)
-        self.delta_psi      = self.nutasi.delta_psi
-        self.epsilon        = self.nutasi.epsilon
+        self.nutasi                     = Nutation(t_td)
+        self.delta_psi                  = self.nutasi.delta_psi
+        self.epsilon                    = self.nutasi.epsilon
         
-        koreksi_bulan       = MoonCorrection(t_td)
-        self.T              = koreksi_bulan.koreksi_bujur_bulan
+        koreksi_bulan                   = MoonCorrection(t_td)
+        self.T                          = koreksi_bulan.koreksi_bujur_bulan
 
-        koreksi_matahari    = SunCorrection(t_td)
-        self.theta_terkoreksi = koreksi_matahari.theta_terkoreksi
-        self.jarak_bumi_matahari = koreksi_matahari.jarak_bumi_matahari
-        self.lintang_matahari_tampak = koreksi_matahari.lintang_matahari_tampak
+        koreksi_matahari                = SunCorrection(t_td)
+        self.theta_terkoreksi           = koreksi_matahari.theta_terkoreksi
+        self.jarak_bumi_matahari        = koreksi_matahari.jarak_bumi_matahari
+        self.lintang_matahari_tampak    = koreksi_matahari.lintang_matahari_tampak
 
-        self.lst_nampak     = lst_nampak
-        self.latitude       = radians(latitude)
+        self.lst_nampak                 = lst_nampak
+        self.latitude                   = radians(latitude)
 
     
     @property

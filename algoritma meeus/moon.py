@@ -1,7 +1,8 @@
 from math import radians, sin, cos, tan, asin, acos, atan2, degrees
 from nutation import *
 from moon_correction import MoonCorrection
-from sun import *
+from sun_correction import SunCorrection
+#from sun import *
 
 
 class Moon:
@@ -17,6 +18,7 @@ class Moon:
         self.delta_psi              = self.nutasi.delta_psi
         self.lst_nampak             = lst_nampak
         self.latitude               = latitude
+        self.jarak_bumi_matahari    = SunCorrection(t_td).jarak_bumi_matahari * 149598000
         self.a_matahari             = a_matahari
         self.d_matahari             = d_matahari                    
 
@@ -92,9 +94,11 @@ class Moon:
 
     @property
     def sudut_fase(self):
-        pass
+        x = self.jarak_bumi_bulan - self.jarak_bumi_matahari*cos(self.sudut_fai)
+        y = self.jarak_bumi_matahari*sin(self.sudut_fai)
+        return atan2(y,x)
 
 
     @property
     def illuminasi(self):
-        pass
+        return 100*(1 + cos(self.sudut_fase))/2

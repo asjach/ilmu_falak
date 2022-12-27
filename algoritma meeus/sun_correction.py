@@ -1,6 +1,6 @@
 from math import degrees, radians, sin, cos
 from moon_correction import MoonCorrection
-from correction_datalist import *
+from terms import *
 
 class SunCorrection:
     def __init__(self, t):
@@ -102,7 +102,7 @@ class SunCorrection:
         beta_terkoreksi = beta + delta_beta
         return radians(beta_terkoreksi/3600)
 
-
+    
     def lambda_aksen(self):
         # T adalah koreksi bujur bulan
         return radians((self.theta - 1.397 * self.T - 0.00031*self.T**2) % 360)
