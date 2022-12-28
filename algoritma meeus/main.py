@@ -1,5 +1,4 @@
 from math import *
-from utilities import *
 from place import Place
 from moon import *
 from sun import *
@@ -50,7 +49,7 @@ T = KonversiWaktu(tanggal.year, tanggal.month, tanggal.day, waktu.hour, waktu.mi
 # OUTPUT
 data_matahari = Sun(T.T_td, T.LST_nampak, lokasi1.latitude_dec)
 data_bulan = Moon(T.T_td, T.LST_nampak, lokasi1.latitude_dec, data_matahari.alpha_matahari, data_matahari.delta_matahari)
-
+x = T
 
 print(f"""
 Data Bulan

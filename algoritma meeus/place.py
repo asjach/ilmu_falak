@@ -1,6 +1,7 @@
-
 from math import radians
-from utilities import *
+from functions import to_dms
+
+
 class Place:
     def __init__(self, nama_lokasi, lat_deg, lat_min, lat_sec, lat_direction, lon_deg, lon_min, lon_sec, lon_direction):
         self.nama_lokasi = nama_lokasi

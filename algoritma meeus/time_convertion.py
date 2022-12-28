@@ -13,20 +13,12 @@ class KonversiWaktu:
         self.timezone       = timezone
         self.T_ut           = (self.JD_ut-2451545)/36525
         delta_t             = delta_T(self.year_decimal)/86400
-        self.JDE            = self.JD_ut + delta_t
-        self.T_td           = (self.JDE - 2451545)/36525
-        self.tau            = self.T_td/10
-        
-
-        
-        self.GST            = ((280.46061837 + 360.98564736629*(self.JD_ut - 2451545) + 0.000387933*self.T_ut**2 - self.T_ut**3/38710000) % 360)/15
-
-
+        JDE                 = self.JD_ut + delta_t
+        self.T_td           = (JDE - 2451545)/36525
+        GST                 = ((280.46061837 + 360.98564736629*(self.JD_ut - 2451545) + 0.000387933*self.T_ut**2 - self.T_ut**3/38710000) % 360)/1
         nutasi              = Nutation(self.T_td)
-        self.GST_nampak     = self.GST + nutasi.delta_psi * cos(nutasi.epsilon)/15
-        self.LST_nampak     = (self.GST_nampak + longitude/15) % 24
-        self.koreksi_dpsi   = nutasi.delta_psi_total
-
+        GST_nampak          = GST + nutasi.delta_psi * cos(nutasi.epsilon)/15
+        self.LST_nampak     = (GST_nampak + longitude/15) % 24
 
     @property
     def JD_ut(self):
@@ -52,3 +44,4 @@ class KonversiWaktu:
     @property
     def year_decimal(self):
             return self.year + (self.month-1)/12 + self.day/365
+
