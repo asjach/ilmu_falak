@@ -9,8 +9,7 @@ class SunCorrection:
         self.theta              = (degrees(self.L()) + 180) % 360
         self.delta_theta        = -0.09033/3600  
         self.theta_terkoreksi   = (self.theta + self.delta_theta) % 360
-        koreksi_bulan           = MoonCorrection(t)
-        self.T                  = koreksi_bulan.koreksi_bujur_bulan
+        self.T                  = self.t * 10
     
         pass
 

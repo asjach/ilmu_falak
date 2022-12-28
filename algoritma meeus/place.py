@@ -46,7 +46,7 @@ class Place:
 
     @property
     def longitude_dms(self):
-        return to_dms(self.latitude_dec)
+        return to_dms(self.longitude_dec)
 
 
     @property

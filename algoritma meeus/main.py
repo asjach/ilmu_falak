@@ -1,11 +1,11 @@
 from math import *
+from functions import to_dms
 from place import Place
 from moon import *
 from sun import *
 from nutation import *
-from delta_t import delta_T
 from moon_correction import *
-from time_convertion import KonversiWaktu
+from time_convertion import T_td, LST
 
 
 class Tanggal:
@@ -21,7 +21,7 @@ class Tanggal:
 
     @property
     def ymd(self):
-        return {'y': self.year, 'm': self.month, 'd': self.day}
+        return [self.year, self.month, self.day]
 
 
 class Waktu:
@@ -31,11 +31,10 @@ class Waktu:
         self.second     = second
         self.timezone   = timezone
 
-
     @property
     def hms(self):
-        #return (self.hour, self.minute, self.second)
-        return {'h': self.hour, 'm':self.minute, 's':self.second}
+        return [self.hour, self.minute, self.second, self.timezone]
+
 
 #INPUT
 lokasi1 = Place("Bandung", 6,57,0,"LS", 107, 37,0,"BT")
@@ -43,18 +42,25 @@ tanggal = Tanggal(2022,12,14)
 waktu = Waktu(14, 0, 0, 7)
 
 #PROSES
-T = KonversiWaktu(tanggal.year, tanggal.month, tanggal.day, waktu.hour, waktu.minute, waktu.second, waktu.timezone, lokasi1.longitude_dec)
+data_waktu = tanggal.ymd + waktu.hms
+def data2(tgl, hms):
+    return tgl+hms
+
+# T = KonversiWaktu(tanggal.year, tanggal.month, tanggal.day, waktu.hour, waktu.minute, waktu.second, waktu.timezone, lokasi1.longitude_dec)
+T = T_td(*data_waktu)
+lst = LST(*data_waktu,lokasi1.longitude_dec)
 
 
 # OUTPUT
-data_matahari = Sun(T.T_td, T.LST_nampak, lokasi1.latitude_dec)
-data_bulan = Moon(T.T_td, T.LST_nampak, lokasi1.latitude_dec, data_matahari.alpha_matahari, data_matahari.delta_matahari)
-x = T
+data_matahari = Sun(T.T_td, lst.LST_nampak, lokasi1.latitude_dec)
+data_bulan = Moon(T.T_td, lst.LST_nampak, lokasi1.latitude_dec, data_matahari.alpha_matahari, data_matahari.delta_matahari)
 
-print(f"""
+
+output = (
+f"""                بسم الله الرحمن الرحيم
 Data Bulan
 Lokasi                  : {lokasi1.nama_lokasi}, {lokasi1.koordinat}        
-Bujur rata-rata bulan   : {degrees(data_bulan.bujur_rata_rata_bulan)}°                       
+Bujur rata-rata bulan   : {to_dms(degrees(data_bulan.bujur_rata_rata_bulan))}°                       
 Koreksi bujur bulan     : {data_bulan.koreksi_bujur_bulan} rads
 Bujur Bulan             : {data_bulan.bujur_bulan}° 
 Koreksi Delta Psi       : {data_bulan.delta_psi}°
@@ -79,7 +85,7 @@ Delta Psi               : {data_matahari.delta_psi}°
 Koreksi aberasi         : {data_matahari.koreksi_aberasi}
 Bujur matahari nampak   : {data_matahari.bujur_matahari_nampak}
 Lintang matahari nampak : {data_matahari.lintang_matahari_tampak}
-Jarak bumi-matahari =   : {data_matahari.jarak_bumi_matahari} ({data_matahari.jarak_bumi_matahari*149598000}km)
+Jarak bumi-matahari =   : {data_matahari.jarak_bumi_matahari} ({data_matahari.jarak_bumi_matahari*149598000} km)
 Sudut jari-jari matahari: {data_matahari.sudut_jari_jari_matahari}
 Alpha                   : {data_matahari.alpha_matahari}
 Delta                   : {data_matahari.delta_matahari}
@@ -91,4 +97,5 @@ Sudut paralaks matahari : {data_matahari.sudut_parallaks_matahari}
 """)
 
 
-
+with open('output.txt', 'a', encoding='utf-8') as f:
+    f.write(output)
