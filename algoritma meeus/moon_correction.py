@@ -6,29 +6,29 @@ class MoonCorrection:
     def __init__(self, t):
         # T dalam TD
 
-        self._t = t
+        self._t         = t
         
         #bujur rata-rata bulan
-        self.L_aksen  =radians((218.3164591 + 481267.88134236*t - 0.0013268*t**2 + t**3/538841 - t**4/65194000) % 360)
+        self.L_aksen    =radians((218.3164591 + 481267.88134236*t - 0.0013268*t**2 + t**3/538841 - t**4/65194000) % 360)
         
         #elongasi rata-rata bulan
-        self.d = radians((297.8502042 + 445267.1115168*t - 0.00163*t**2 + t**3/545868 - t**4/113065000) % 360)
+        self.d          = radians((297.8502042 + 445267.1115168*t - 0.00163*t**2 + t**3/545868 - t**4/113065000) % 360)
         
         # Anomali rata-rata matari
-        self.m = radians((357.5291092 + 35999.0502909*t - 0.0001536*t**2 + t**3/24490000) % 360)
+        self.m          = radians((357.5291092 + 35999.0502909*t - 0.0001536*t**2 + t**3/24490000) % 360)
         
         # Anomali rata-rata bulan
         self.m_aksen    = radians((134.9634114 + 477198.8676313*t + 0.008997*t**2 + t**3/69699 - t**4/14712000) % 360)
 
         # argumen bujur bulan
-        self.f = radians((93.2720993 + 483202.0175273*t - 0.0034029*t**2 - t**3/3526000 + t**4/863310000) % 360)
+        self.f          = radians((93.2720993 + 483202.0175273*t - 0.0034029*t**2 - t**3/3526000 + t**4/863310000) % 360)
 
         # eksentrisitas orbit
-        self.e = 1 - 0.002516*t - 0.0000074*t**2
+        self.e          = 1 - 0.002516*t - 0.0000074*t**2
 
-        self.A1 = radians((119.75 + 131.849 * t) % 360)
-        self.A2 = radians((53.09 + 479264.29 * t) % 360)
-        self.A3 = radians((313.45 + 481266.484 * t) % 360)
+        self.A1         = radians((119.75 + 131.849 * t) % 360)
+        self.A2         = radians((53.09 + 479264.29 * t) % 360)
+        self.A3         = radians((313.45 + 481266.484 * t) % 360)
 
 
     @property
