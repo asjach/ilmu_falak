@@ -72,3 +72,77 @@ Azimuth dari selatan    : 47.456083075111415
 Azimuth                 : 227.45608307511142
 Altitude                : -44.4785510142779
 Sudut paralaks matahari : 0.0024815171538136254
+                بسم الله الرحمن الرحيم
+Data Bulan
+Lokasi                  : Bandung, 6°57'0" LS 107°37'0" BT        
+Bujur rata-rata bulan   : 153° 18' 50.94"°                       
+Koreksi bujur bulan     : -4.185889844694687 rads
+Bujur Bulan             : 149.12826061327425° 
+Koreksi Delta Psi       : -0.0031546854115222793°
+Bujur Bulan Nampak      : 2.602724095826518°
+Lintang Bulan           : 0.08640983906425355 rad
+Jarak Bulan-Bumi        : 403140.55896358256 km
+Sudut Parallaks         : 0.906521912011964°
+Sudut jari-jari bulan   : 0.24700056154220784°
+Alpha                   : 153.05049354465308°
+Delta                   : 16.411590517651995°
+Hour Angle              : -106.37921141676739°
+Azimuth dari Selatan    : -105.06543312321794°
+Azimuth                 : 74.93456687678206°
+Altitude                : -17.62009165116315°
+Sudut Fai               : 1.9727659125830566°
+Sudut Fase (i)          : 1.1663101244784344°
+Illuminasi Bulan        : 69.67732378504185°
+
+DATA MATAHARI
+Theta_terkoreksi        : 262.2564632627607°
+Delta Psi               : -0.0031546854115222793°
+Koreksi aberasi         : -0.005781780601770272
+Bujur matahari nampak   : 4.577082797815301
+Lintang matahari nampak : 2.0756365966704243e-06
+Jarak bumi-matahari =   : 0.984404546476296 (147264951.34376094 km)
+Sudut jari-jari matahari: 0.2707869339318493
+Alpha                   : 261.55999357308605
+Delta                   : -0.40511066221928277
+Hour Angle              : -3.7505155400867687
+Azimuth dari selatan    : 47.45608380902153
+Azimuth                 : 227.45608380902152
+Altitude                : -44.47855136651084
+Sudut paralaks matahari : 0.0024815171538136254
+                بسم الله الرحمن الرحيم
+Data Bulan
+Lokasi                  : Bandung, 6°57'0" LS 107°37'0" BT        
+Bujur rata-rata bulan   : 153° 18' 50.94"°                       
+Koreksi bujur bulan     : -4.185889844694687 rads
+Bujur Bulan             : 149.12826061327425° 
+Koreksi Delta Psi       : -0.0031546854115222793°
+Bujur Bulan Nampak      : 2.602724095826518°
+Lintang Bulan           : 0.08640983906425355 rad
+Jarak Bulan-Bumi        : 403140.55896358256 km
+Sudut Parallaks         : 0.906521912011964°
+Sudut jari-jari bulan   : 0.24700056154220784°
+Alpha                   : 153.05049354465308°
+Delta                   : 16.411590517651995°
+Hour Angle              : -106.37921141676739°
+Azimuth dari Selatan    : -105.06543312321794°
+Azimuth                 : 74.93456687678206°
+Altitude                : -17.62009165116315°
+Sudut Fai               : 1.9727659125830566°
+Sudut Fase (i)          : 1.1663101244784344°
+Illuminasi Bulan        : 69.67732378504185°
+
+DATA MATAHARI
+Theta_terkoreksi        : 262.2564632627607°
+Delta Psi               : -0.0031546854115222793°
+Koreksi aberasi         : -0.005781780601770272
+Bujur matahari nampak   : 4.577082797815301
+Lintang matahari nampak : 2.0756365966704243e-06
+Jarak bumi-matahari =   : 0.984404546476296 (147264951.34376094 km)
+Sudut jari-jari matahari: 0.2707869339318493
+Alpha                   : 261.55999357308605
+Delta                   : -0.40511066221928277
+Hour Angle              : -3.7505155400867687
+Azimuth dari selatan    : 47.45608380902153
+Azimuth                 : 227.45608380902152
+Altitude                : -44.47855136651084
+Sudut paralaks matahari : 0.0024815171538136254

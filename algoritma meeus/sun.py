@@ -6,7 +6,7 @@ from sun_correction import SunCorrection
 class Sun:
     def __init__(self, t_td, lst_nampak, latitude):
         self.t                          = t_td
-        self.tau                        = t_td/10
+        # self.tau                        = t_td/10
         
         self.nutasi                     = Nutation(t_td)
         self.delta_psi                  = self.nutasi.delta_psi
