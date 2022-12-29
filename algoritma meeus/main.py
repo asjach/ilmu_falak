@@ -99,3 +99,4 @@ Sudut paralaks matahari : {data_matahari.sudut_parallaks_matahari}
 
 with open('output.txt', 'a', encoding='utf-8') as f:
     f.write(output)
+    f.close()
