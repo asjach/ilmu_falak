@@ -1,6 +1,7 @@
 from math import radians, cos, sin
+from terms import terms_delta_epsilon, terms_delta_psi
 
-from terms import delta_psi, delta_epsilon
+#from terms import delta_psi, delta_epsilon
 
 class Nutation:
     def __init__(self, t_td):
@@ -14,7 +15,8 @@ class Nutation:
 
     @property
     def epsilon(self):
-        hasil = radians(self.epsilon_zero + (self.delta_epsilon_total)/3600)
+        hasil = self.epsilon_zero + (self.delta_epsilon_total)/3600
+        hasil = radians(hasil)
         return hasil
     
     @property
@@ -34,8 +36,8 @@ class Nutation:
         omega = self.omega
 
         total = 0
-        for i in range(len(delta_epsilon)):
-            total += (delta_epsilon[i][5] + delta_epsilon[i][6]*t) * cos(delta_epsilon[i][0] * d + delta_epsilon[i][1] * m + delta_epsilon[i][2] * m_aksen + delta_epsilon[i][3] * f + delta_epsilon[i][4] * omega)
+        for i in range(len(terms_delta_epsilon)):
+            total += (terms_delta_epsilon[i][5] + terms_delta_epsilon[i][6]*t) * cos(terms_delta_epsilon[i][0] * d + terms_delta_epsilon[i][1] * m + terms_delta_epsilon[i][2] * m_aksen + terms_delta_epsilon[i][3] * f + terms_delta_epsilon[i][4] * omega)
         return total/10000
 
     @property
@@ -52,8 +54,8 @@ class Nutation:
         f = self.f
         omega = self.omega
         total = 0
-        for i in range(len(delta_psi)):
-            total += (delta_psi[i][5] + delta_psi[i][6]*t) * sin(delta_psi[i][0] * d + delta_psi[i][1] * m + delta_psi[i][2] * m_aksen + delta_psi[i][3] * f + delta_psi[i][4] * omega)
+        for i in range(len(terms_delta_psi)):
+            total += (terms_delta_psi[i][5] + terms_delta_psi[i][6]*t) * sin(terms_delta_psi[i][0] * d + terms_delta_psi[i][1] * m + terms_delta_psi[i][2] * m_aksen + terms_delta_psi[i][3] * f + terms_delta_psi[i][4] * omega)
         return total/10000
 
         pass

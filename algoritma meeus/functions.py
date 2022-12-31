@@ -51,17 +51,19 @@ def julian_day(year:int, month:int, day:int, hour:int, minute:int, second:int, t
     y = year - 1 if month < 3 else year
     a = int(y/100)
     if year < 1583:
-        if month < 11:
-            if day < 4:
-                b = 0
-                if day > 14:
+        if year == 1982:
+            if month == 10:
+                if day > 4 and day < 15:
+                    print("Tidak ada tanggal 5-14 Oktober 1582 dalam sejarah")
+                elif day > 14:
                     b = 2 + int(a/4)-a
-                else:
-                    print("tanggal salah")
-        else:
-            b = 2 + int(a/4) - a
+            elif month > 10:
+                b = 2 + int(a/4)-a
+            else:
+                b = 0 
+        b = 0               
     else:
-        b   = 2 + int(a/4) - a
+        b = 2 + int(a/4) - a
     JD = 1720994.5 + int(365.25 * y) + int(30.60001 * (m + 1)) + b + day + (hour + minute/60 + second/3600)/24 - timezone/24
     return JD
 
@@ -137,4 +139,4 @@ def delta_T(year_decimal):
 
     if year_decimal > 2150:
         delta = -20 + 32*((year_decimal - 1820)/100)*((year_decimal - 1820)/100)
-    return delta    
+    return delta/86400    
