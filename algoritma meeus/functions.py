@@ -13,14 +13,24 @@ def to_dec(d: int, m: int = 0, s:float = 0):
     return _dec
 
 
-def to_dms(dec):
+def to_dms(decimal_value):
     '''
     fungsi untuk mengubah Desimal menjadi DMS
     '''
-    _d = int(dec)
-    _m = int((dec - _d)*60)
-    _s = ((dec - _d)*60 - _m)*60
+    _d = int(decimal_value)
+    _m = int((decimal_value - _d)*60)
+    _s = ((decimal_value - _d)*60 - _m)*60
     return f"{_d}° {abs(_m)}' {round(abs(_s),2)}\""
+
+
+def to_hms(decimal_value):
+    '''
+    fungsi untuk mengubah Desimal menjadi H:M:S
+    '''
+    _d = int(decimal_value)
+    _m = int((decimal_value - _d)*60)
+    _s = ((decimal_value - _d)*60 - _m)*60
+    return f"{_d}:{abs(_m)}:{round(abs(_s),2)}"
 
 
 def cek_kabisat(thn):
@@ -66,6 +76,20 @@ def julian_day(year:int, month:int, day:int, hour:int, minute:int, second:int, t
         b = 2 + int(a/4) - a
     JD = 1720994.5 + int(365.25 * y) + int(30.60001 * (m + 1)) + b + day + (hour + minute/60 + second/3600)/24 - timezone/24
     return JD
+
+
+def latitude_dec(d, m, s, dir):
+        if dir == "N" or dir == "LU":
+            return d + m/60 + s/3600
+        return -(d + m/60 + s/3600)
+
+
+def longitude_dec(d, m, s, dir):
+    if dir == "E" or dir == "BT":
+        return d + m/60 + s/3600
+    return -(d + m/60 + s/3600)
+
+
 
 
 def delta_T(year_decimal):

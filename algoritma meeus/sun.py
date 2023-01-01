@@ -1,5 +1,4 @@
 from math import asin, atan, atan2, degrees, radians, sin, cos, tan
-#from temp_moon import MoonCorrection
 from nutation import Nutation
 from terms import *
 
@@ -186,8 +185,9 @@ class SunProperty():
 
     @property
     def equation_of_time(self):
-        L0 = (280.4664567 + 360007.6982779 * self.tau + 0.03032028 * self.tau **2 + self.tau**3/49931 - self.tau**4/15300 - self.tau**5/2000000) % 360
-        eot = L0 - 0.0057183 - self.sun_equatorial.right_acsension + self.nutation.delta_psi * cos(radians(self.nutation.epsilon))
+        u = self.tau
+        L0 = (280.4664567 + 360007.6982779 * u + 0.03032028 * u **2 + u**3/49931 - u**4/15300 - u**5/2000000) % 360
+        eot = (L0 - 0.0057183 - degrees(self.sun_equatorial.right_acsension) + (self.nutation.delta_psi) * cos((self.nutation.epsilon)))*4
         return eot
 
 

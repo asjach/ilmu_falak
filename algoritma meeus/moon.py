@@ -1,7 +1,7 @@
 from math import acos, asin, atan2, degrees, radians, sin, cos, tan
 from nutation import Nutation
-from temp_sun import SunCorrection, SunProperty
-from temp_sun import SunEquatorial
+from sun import SunProperty
+from sun import SunEquatorial
 from terms import *
 
 

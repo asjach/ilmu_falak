@@ -1,19 +1,19 @@
 from math import cos
 from functions import julian_day, delta_T, to_dms
 from nutation import Nutation
-from temp_moon import *
-from temp_sun import *
+from moon import *
+from sun import *
 
 
 #  simulasi input
 # tanggal dan waktu
-tahun = 2022
-bulan = 12
-tgl = 31
-jam = 7
-menit = 52
-detik = 13
-timezone = 7
+tahun = 1992
+bulan = 10
+tgl = 13
+jam = 0
+menit = 0
+detik = 0
+timezone = 0
 
 # lokasi
 lintang_d = 6
@@ -48,6 +48,10 @@ class Ephemeris():
         self.moon_equatorial = MoonEquatorial(self.T, self.lst)
         self.moon_property = MoonProperty(self.T, self.lst)
         self.moon_horizontal = MoonHorizon(self.T, self.lst, self.latitude_dec)
+        self.sun_ecliptic = SunEcliptic(self.T)
+        self.sun_equatorial = SunEquatorial(self.T)
+        self.sun_horizon = SunHorizon(self.T, self.latitude_dec)
+        self.sun_property = SunProperty(self.T)
 
     @property
     def jd(self):
@@ -137,6 +141,14 @@ class Ephemeris():
         return self.moon_property.sudut_parallaks
 
 
+    @property
+    def sun_declination(self):
+        return self.sun_equatorial.declination
+
+
+    @property
+    def eot(self):
+        return self.sun_property.equation_of_time
 
 moon = Ephemeris(tahun, bulan, tgl, jam, menit, detik, lintang_d, lintang_m, lintang_s, lintang_arah, bujur_d, bujur_m, bujur_s, bujur_arah, timezone)
 print(f'''
@@ -154,5 +166,8 @@ Horizontal Parallax: {moon.moon_parallax}
 
 sudut fai : {moon.moon_property.sudut_fai}
 sudut fase: {moon.moon_property.sudut_fase}
-illuminasi: {moon.moon_property.illuminasi}
+
+
+
+eot: {to_dms(moon.eot)}
 ''')
