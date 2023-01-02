@@ -1,4 +1,4 @@
-def to_dec(d: int, m: int = 0, s:float = 0):
+def print_dec(d: int, m: int = 0, s:float = 0):
     '''
     Fungsi untuk merubah bentuk DMS menjadi desimal  
     '''
@@ -13,7 +13,7 @@ def to_dec(d: int, m: int = 0, s:float = 0):
     return _dec
 
 
-def to_dms(decimal_value):
+def print_dms(decimal_value):
     '''
     fungsi untuk mengubah Desimal menjadi DMS
     '''
@@ -23,7 +23,7 @@ def to_dms(decimal_value):
     return f"{_d}° {abs(_m)}' {round(abs(_s),2)}\""
 
 
-def to_hms(decimal_value):
+def print_hms(decimal_value):
     '''
     fungsi untuk mengubah Desimal menjadi H:M:S
     '''
@@ -43,20 +43,64 @@ def cek_kabisat(thn):
     return False
 
 
+def dms_to_dec(d=None, m=None, s=None, dir=None):
+    plus = ["LU", "N", "BT", "E", 'lu', 'n', 'bt', 'e']
+    minus = ['LS', 'S', 'BB', 'W', 'ls', 's', 'bb', 'w']
 
-# fungsi year_decimal
-def year_dec(year, month, day):
-    '''
-    fungsi untuk mengubah tahun, bulan, tanggal menjadi bentuk desimal
-    dalam modul ini diperlukan untuk menemukan Delta T
-    '''
-    return year + month/12 + day/365
+    hasil = d + m/60 + s/3600
+    if dir in plus:
+        return hasil
+    elif dir in minus:
+        return -hasil
+    return plus
 
 
-def julian_day(year:int, month:int, day:int, hour:int, minute:int, second:int, timezone:float)-> float:
+def jd(*input)-> float:
     """
-    fungsi untuk mengubah tanggal dan waktu menjadi Julian Day
+    Julian Day (JD) dalam Universal Time (UT)
+
+    Input:
+    - year, month, day (Y, M, D 0) UT
+    - year, month, day, hour ( Y, M, D, h) UT
+    - year, month, day, hour, timezone ( Y, M, D, h, timezone) Local Time
+    - year, month, day, hour, minute, second (Y, M, D, h, m, s) UT
+    - year, month, day, hour, minute, second, timezone (Y, M, D, h, m, s, timezone) Local Time
     """
+    hour = minute = second = timezone = 0
+    if len(input) == 3:
+        year = input[0]
+        month = input[1]
+        day = input[2]
+    elif len(input) == 4:
+        year = input[0]
+        month = input[1]
+        day = input[2]
+        hour = input[3]        
+    elif len(input) == 5:
+        year = input[0]
+        month = input[1]
+        day = input[2]
+        hour = input[3]
+        timezone = input[4]
+    elif len(input) == 6:
+        year = input[0]
+        month = input[1]
+        day = input[2]
+        hour = input[3]
+        minute = input[4]
+        second = input[5]
+    elif len(input) == 7:
+        year = input[0]
+        month = input[1]
+        day = input[2]
+        hour = input[3]
+        minute = input[4]
+        second = input[5]
+        timezone = input[6]
+    else:
+        return f'wrong input'
+
+
     m = month + 12 if month < 3 else month
     y = year - 1 if month < 3 else year
     a = int(y/100)
@@ -78,22 +122,37 @@ def julian_day(year:int, month:int, day:int, hour:int, minute:int, second:int, t
     return JD
 
 
-def latitude_dec(d, m, s, dir):
-        if dir == "N" or dir == "LU":
-            return d + m/60 + s/3600
-        return -(d + m/60 + s/3600)
+def delta_t(*input) -> float:
+    """ Delta T
 
+    Parameter: 
+    - Year in decimal (1 input)
+    - Year in decimal, D | S (1 input, output dalam Day atau dalan Second)
+    - Year, Month, D | S (2 input, output D atau S)
+    - Year, Month, Day (3 input, output otomatis D)
+    - Year, Month, Day, D | S (3 input, output D | S)
 
-def longitude_dec(d, m, s, dir):
-    if dir == "E" or dir == "BT":
-        return d + m/60 + s/3600
-    return -(d + m/60 + s/3600)
+    Pilihan output antara D (day) atau S (second), jika tidak diinput/diinput selain nilai tersebut maka akan mengembalikan 'D'
+    """
 
+    if len(input) == 3:
+        if type(input[-1]) == str:
+            _year = input[0]
+            _month = input[1]
+            year_decimal = _year + (_month-1)/12
+        else:
+            _year = input[0]
+            _month = input[1]
+            _day = input[2]
+            year_decimal = _year + (_month-1)/12 + _day/365
+    elif len(input) == 4:
+        _year = input[0]
+        _month = input[1]
+        _day = input[2]
+        year_decimal = _year + (_month-1)/12 + _day/365
+    else:
+        year_decimal = input[0]
 
-
-
-def delta_T(year_decimal):
-    #year_decimal = year + (month-1)/12 + day/365
     delta = 0
     if year_decimal <= -500:
         delta = -20 + 32 * (year_decimal/100 - 18.2) * (year_decimal/100 - 18.2)
@@ -163,4 +222,66 @@ def delta_T(year_decimal):
 
     if year_decimal > 2150:
         delta = -20 + 32*((year_decimal - 1820)/100)*((year_decimal - 1820)/100)
+
+
+    if len(input)> 1 and type(input[-1]) == str:
+        if input[-1] == 'S' or input[-1] == 's':      
+            return delta
     return delta/86400    
+
+
+def jde(*input):
+    '''
+    Julian Ephemeris Day
+
+    Parameter:
+    - jd
+    - Y, M, D
+    - Y, M, D, Timezone
+    - Y, M, D, H, M, S
+    - Y, M, D, h, m, s, timezone
+
+    '''
+    if len(input) == 1:
+        ...
+    elif len(input) == 3:
+        ...
+    elif len(input) == 4:
+        ...
+    elif len(input) == 5:
+        ...
+    elif 
+
+    jd = jd(*input)
+    deltaT = delta_t(input[0], input[1], input[2])
+
+    return jd + deltaT
+
+
+
+
+def t_ut(*input):
+    '''
+    Julian Century dalam Universal Time
+
+    Parameter:
+    - Julian Day (1 input)
+    - Year, month, day (3 input)
+    - Year, month, day, hour, minute, second, timezone (7 input)
+    '''
+    if len(input) == 1:
+        jd = input[0]
+        return (jd - 2451545)/36525
+    elif len(input) >= 3 and len(input) <= 7:
+        jd = jd(*input)
+        return (jd - 2451545)/36525
+    elif len(input) > 7:
+        return f'wrong input'
+
+
+def t_td(*input):
+    ...
+
+
+def tau(*input):
+    ...

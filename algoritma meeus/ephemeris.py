@@ -1,5 +1,5 @@
 from math import cos
-from functions import julian_day, delta_T, to_dms
+from functions import julian_day, delta_t, print_hms
 from nutation import Nutation
 from moon import *
 from sun import *
@@ -60,7 +60,7 @@ class Ephemeris():
     @property
     def jde(self):
         decimal_year = self.year + (self.month-1)/12 + self.day/365
-        deltaT = delta_T(decimal_year)
+        deltaT = delta_t(decimal_year)
         return self.jd + deltaT
         
     @property
@@ -169,5 +169,5 @@ sudut fase: {moon.moon_property.sudut_fase}
 
 
 
-eot: {to_dms(moon.eot)}
+eot: {print_hms(moon.eot)}
 ''')
