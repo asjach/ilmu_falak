@@ -1,5 +1,5 @@
 from math import cos
-from functions import julian_day, delta_t, print_hms
+from functions import dms_to_dec, jd, delta_t, print_hms
 from nutation import Nutation
 from moon import *
 from sun import *
@@ -7,10 +7,10 @@ from sun import *
 
 #  simulasi input
 # tanggal dan waktu
-tahun = 1992
-bulan = 10
-tgl = 13
-jam = 0
+tahun = 2023
+bulan = 1
+tgl = 3
+jam = 12
 menit = 0
 detik = 0
 timezone = 0
@@ -47,27 +47,27 @@ class Ephemeris():
         self.moon_ecliptic = MoonEcliptic(self.T)
         self.moon_equatorial = MoonEquatorial(self.T, self.lst)
         self.moon_property = MoonProperty(self.T, self.lst)
-        self.moon_horizontal = MoonHorizon(self.T, self.lst, self.latitude_dec)
+        self.moon_horizontal = MoonHorizon(self.T, self.lst, dms_to_dec(lat_d, lat_m, lat_s, lat_dir))
         self.sun_ecliptic = SunEcliptic(self.T)
         self.sun_equatorial = SunEquatorial(self.T)
-        self.sun_horizon = SunHorizon(self.T, self.latitude_dec)
+        self.sun_horizon = SunHorizon(self.T, dms_to_dec(lat_d, lat_m, lat_s, lat_dir))
         self.sun_property = SunProperty(self.T)
 
     @property
-    def jd(self):
-        return julian_day(self.year, self.month, self.day, self.hour, self.minute, self.second, self.timezone)
+    def _jd(self):
+        return jd(self.year, self.month, self.day, self.hour, self.minute, self.second, self.timezone)
 
     @property
     def jde(self):
         decimal_year = self.year + (self.month-1)/12 + self.day/365
         deltaT = delta_t(decimal_year)
-        return self.jd + deltaT
+        return self._jd + deltaT
         
     @property
     def t(self):
         # T is Julian Century (JC)
         # T in UT (Universal Time)
-        return (self.jd - 2451545)/36525
+        return (self._jd - 2451545)/36525
 
 
     @property
@@ -78,22 +78,11 @@ class Ephemeris():
     
     @property
     def lst(self):
-        gst = ((280.46061837 + 360.98564736629*(self.jd - 2451545) + 0.000387933*self.t**2 - self.t**3/38710000) % 360)/15
+        lon_dec = dms_to_dec(self.lat_d, self.lat_m, self.lat_s, self.lat_dir)
+        gst = ((280.46061837 + 360.98564736629*(self._jd - 2451545) + 0.000387933*self.t**2 - self.t**3/38710000) % 360)/15
         gstA = gst + self.nutation.delta_psi * cos(self.nutation.epsilon)/15
-        lst = (gstA + (self.longitude_dec)/15) % 24
+        lst = (gstA + (lon_dec)/15) % 24
         return lst
-
-    @property
-    def latitude_dec(self):
-        if self.lat_dir == "N" or self.lat_dir == "LU":
-            return self.lat_d + self.lat_m/60 + self.lat_s/3600
-        return (self.lat_d + self.lat_m/60 + self.lat_s/3600) * (-1)
-
-    @property
-    def longitude_dec(self):
-        if self.lon_dir == "E" or self.lon_dir == "BT":
-            return self.lon_d + self.lon_m/60 + self.lon_s/3600
-        return (self.lon_d + self.lon_m/60 + self.lon_s/3600) * (-1)
 
 
     @property
@@ -169,5 +158,5 @@ sudut fase: {moon.moon_property.sudut_fase}
 
 
 
-eot: {print_hms(moon.eot)}
+eot: {print_hms(moon.eot/60)}
 ''')

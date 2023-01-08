@@ -1,14 +1,20 @@
+from functions import print_hms
+from khafid_fungsi import *
+jam = 15
+menit = 40
+detik = 15
+timezone = 7
+waktu = jam/24 + menit/1440 + detik/86400
 
 
-
-def cek_argumen(x):
-    if isinstance(x, str):
-        print('str')
-    elif isinstance(x, int):
-        print('int')
-    elif isinstance(x, tuple):
-        print('tuple')
+tahun = 2023
+bulan = 1
+tanggal = 7 + waktu
+lintang = (6, 57, 0, "LS")
+bujur = (107, 37, 0, "BT")
 
 
-x = (10,10,11, "LS")
-cek_argumen(x)
+print(f'''
+
+'''
+)       

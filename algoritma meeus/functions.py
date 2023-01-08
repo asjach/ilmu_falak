@@ -1,3 +1,5 @@
+# Belum menggunakan Method/Function Overloading
+
 def print_dec(d: int, m: int = 0, s:float = 0):
     '''
     Fungsi untuk merubah bentuk DMS menjadi desimal  
@@ -43,10 +45,13 @@ def cek_kabisat(thn):
     return False
 
 
-def dms_to_dec(d=None, m=None, s=None, dir=None):
+def dms_to_dec(input):
     plus = ["LU", "N", "BT", "E", 'lu', 'n', 'bt', 'e']
     minus = ['LS', 'S', 'BB', 'W', 'ls', 's', 'bb', 'w']
-
+    d = input[0]
+    m = input[1]
+    s = input[2]
+    dir = input[3]
     hasil = d + m/60 + s/3600
     if dir in plus:
         return hasil
@@ -60,42 +65,28 @@ def jd(*input)-> float:
     Julian Day (JD) dalam Universal Time (UT)
 
     Input:
-    - year, month, day (Y, M, D 0) UT
-    - year, month, day, hour ( Y, M, D, h) UT
-    - year, month, day, hour, timezone ( Y, M, D, h, timezone) Local Time
-    - year, month, day, hour, minute, second (Y, M, D, h, m, s) UT
-    - year, month, day, hour, minute, second, timezone (Y, M, D, h, m, s, timezone) Local Time
+    - [3] year, month, day (Y, M, D 0) UT
+    - [4] year, month, day, hour ( Y, M, D, h) UT
+    - [5] year, month, day, hour, timezone ( Y, M, D, h, timezone) Local Time
+    - [6] year, month, day, hour, minute, second (Y, M, D, h, m, s) UT
+    - [7] year, month, day, hour, minute, second, timezone (Y, M, D, h, m, s, timezone) Local Time
     """
     hour = minute = second = timezone = 0
     if len(input) == 3:
-        year = input[0]
-        month = input[1]
-        day = input[2]
+        year = input[0]; month = input[1]; day = input[2]
     elif len(input) == 4:
-        year = input[0]
-        month = input[1]
-        day = input[2]
+        year = input[0]; month = input[1]; day = input[2]
         hour = input[3]        
     elif len(input) == 5:
-        year = input[0]
-        month = input[1]
-        day = input[2]
+        year = input[0]; month = input[1]; day = input[2]
         hour = input[3]
         timezone = input[4]
     elif len(input) == 6:
-        year = input[0]
-        month = input[1]
-        day = input[2]
-        hour = input[3]
-        minute = input[4]
-        second = input[5]
+        year = input[0]; month = input[1]; day = input[2]
+        hour = input[3]; minute = input[4]; second = input[5]
     elif len(input) == 7:
-        year = input[0]
-        month = input[1]
-        day = input[2]
-        hour = input[3]
-        minute = input[4]
-        second = input[5]
+        year = input[0]; month = input[1]; day = input[2]
+        hour = input[3]; minute = input[4]; second = input[5]
         timezone = input[6]
     else:
         return f'wrong input'
@@ -154,134 +145,146 @@ def delta_t(*input) -> float:
         year_decimal = input[0]
 
     delta = 0
+    
     if year_decimal <= -500:
-        delta = -20 + 32 * (year_decimal/100 - 18.2) * (year_decimal/100 - 18.2)
-    if year_decimal > 500 and year_decimal <= 1600:
-        delta =  1574.2 - 556.01*(year_decimal/100-10) + 71.23472*(year_decimal/100-10)*(year_decimal/100-10) 
-        delta += 0.319781*(year_decimal/100-10)*(year_decimal/100-10)*(year_decimal/100-10) 
-        delta -= 0.8503463*(year_decimal/100-10)*(year_decimal/100-10)*(year_decimal/100-10)*(year_decimal/100-10) 
-        delta -= 0.005050998*(year_decimal/100-10)*(year_decimal/100-10)*(year_decimal/100-10)*(year_decimal/100-10)*(year_decimal/100-10) 
-        delta += 0.0083572073*(year_decimal/100-10)*(year_decimal/100-10)*(year_decimal/100-10)*(year_decimal/100-10)*(year_decimal/100-10)*(year_decimal/100-10)
-
-    if year_decimal > 1600 and year_decimal <= 1700:
-        delta = 120 - 0.9808*(year_decimal-1600) - 0.01532*(year_decimal-1600)*(year_decimal-1600) 
-        delta += (year_decimal-1600)*(year_decimal-1600)*(year_decimal-1600)/7129
-
-    if year_decimal > 1700 and year_decimal <= 1800:
-        delta = 8.83 + 0.1603*(year_decimal-1700) - 0.0059285*(year_decimal-1700)*(year_decimal-1700) 
-        delta += 0.00013336*(year_decimal-1700)*(year_decimal-1700)*(year_decimal-1700) 
-        delta -= (year_decimal-1700)*(year_decimal-1700)*(year_decimal-1700)*(year_decimal-1700)/1174000
-
-    if year_decimal > 1800 and year_decimal <= 1860:
-        delta = 13.72 - 0.332447*(year_decimal-1800) + 0.0068612*(year_decimal-1800)*(year_decimal-1800) 
-        delta += 0.0041116*(year_decimal-1800)*(year_decimal-1800)*(year_decimal-1800) 
-        delta -= 0.00037436*(year_decimal-1800)*(year_decimal-1800)*(year_decimal-1800)*(year_decimal-1800) 
-        delta += 0.0000121272*(year_decimal-1800)*(year_decimal-1800)*(year_decimal-1800)*(year_decimal-1800)*(year_decimal-1800) 
-        delta -= 0.0000001699*(year_decimal-1800)*(year_decimal-1800)*(year_decimal-1800)*(year_decimal-1800)*(year_decimal-1800)*(year_decimal-1800) 
-        delta += 0.000000000875*(year_decimal-1800)*(year_decimal-1800)*(year_decimal-1800)*(year_decimal-1800)*(year_decimal-1800)*(year_decimal-1800)*(year_decimal-1800)
-
-    if year_decimal > 1860 and year_decimal <= 1900:
-        delta = 7.62 + 0.5737*(year_decimal-1860) - 0.251754*(year_decimal-1860)*(year_decimal-1860) 
-        delta += 0.01680668*(year_decimal-1860)*(year_decimal-1860)*(year_decimal-1860) 
-        delta -= 0.0004473624*(year_decimal-1860)*(year_decimal-1860)*(year_decimal-1860)*(year_decimal-1860) 
-        delta += (year_decimal-1860)*(year_decimal-1860)*(year_decimal-1860)*(year_decimal-1860)*(year_decimal-1860)/233174
-
-    if year_decimal > 1900 and year_decimal <= 1920:
-        delta = -2.79 + 1.494119*(year_decimal-1900) - 0.0598939*(year_decimal-1900)*(year_decimal-1900) 
-        delta += 0.0061966*(year_decimal-1900)*(year_decimal-1900)*(year_decimal-1900) 
-        delta -= 0.000197*(year_decimal-1900)*(year_decimal-1900)*(year_decimal-1900)*(year_decimal-1900)
-
-    if year_decimal > 1920 and year_decimal <= 1941:
-        delta = 21.2 + 0.84493*(year_decimal-1920) 
-        delta -= 0.0761*(year_decimal-1920)*(year_decimal-1920) 
-        delta += 0.0020936*(year_decimal-1920)*(year_decimal-1920)*(year_decimal-1920)
-
-    if year_decimal > 1941 and year_decimal <= 1961:
-        delta = 29.07 + 0.407*(year_decimal-1950) 
-        delta -= (year_decimal-1950)*(year_decimal-1950)/233 
-        delta += (year_decimal-1950)*(year_decimal-1950)*(year_decimal-1950)/2547
-
-    if year_decimal > 1961 and year_decimal <= 1986:
-        delta = 45.45 + 1.067*(year_decimal-1975) 
-        delta -= (year_decimal-1975)*(year_decimal-1975)/260 
-        delta -= (year_decimal-1975)*(year_decimal-1975)*(year_decimal-1975)/718
-
-    if year_decimal > 1986 and year_decimal <= 2005:
-        delta = 63.86 + 0.3345*(year_decimal-2000) 
-        delta -= 0.060374*(year_decimal-2000)*(year_decimal-2000) 
-        delta += 0.0017275*(year_decimal-2000)*(year_decimal-2000)*(year_decimal-2000) 
-        delta += 0.000651814*(year_decimal-2000)*(year_decimal-2000)*(year_decimal-2000)*(year_decimal-2000) 
-        delta += 0.00002373599*(year_decimal-2000)*(year_decimal-2000)*(year_decimal-2000)*(year_decimal-2000)*(year_decimal-2000)
-
-    if year_decimal > 2005 and year_decimal <= 2050:
-        delta = 62.92 + 0.32217*(year_decimal-2000) 
-        delta += 0.005589*(year_decimal-2000)*(year_decimal-2000)
-
-    if year_decimal > 2050 and year_decimal <= 2150:
-        delta = -20 + 32*((year_decimal - 1820)/100)*((year_decimal - 1820)/100) - 0.5628*(2150 - year_decimal)
-
-    if year_decimal > 2150:
-        delta = -20 + 32*((year_decimal - 1820)/100)*((year_decimal - 1820)/100)
-
+        c = year_decimal/100
+        delta = -20 + 32 * (c - 18.2)**2
+    elif year_decimal > -500 and year_decimal <= 500:
+        c = year_decimal/100
+        delta = 10583.6 - 1014.41*c + 33.78311*c**2 - 5.952053*c**3 - 0.1798452*c**4 + 0.022174192*c**5 + 0.0090316521*c**6
+    elif year_decimal > 500 and year_decimal <= 1600:
+        c = year_decimal/100
+        delta =  1574.2 - 556.01*(c-10) + 71.23472*(c-10)**2 + 0.319781*(c-10)**3 - 0.8503463*(c-10)**4 - 0.005050998*(c-10)**5 + 0.0083572073*(c-10)**6
+    elif year_decimal > 1600 and year_decimal <= 1700:
+        c = year_decimal - 1600
+        delta = 120 - 0.9808*c - 0.01532*c**2 + c**3/7129
+    elif year_decimal > 1700 and year_decimal <= 1800:
+        c = year_decimal-1700
+        delta = 8.83 + 0.1603*c - 0.0059285*c**2 + 0.00013336*c**3 - c**4/1174000
+    elif year_decimal > 1800 and year_decimal <= 1860:
+        c = year_decimal-1800
+        delta = 13.72 - 0.332447*c + 0.0068612*c**2 + 0.0041116*c**3 - 0.00037436*c**4 + 0.0000121272*c**5 - 0.0000001699*c**6 + 0.000000000875*c**7
+    elif year_decimal > 1860 and year_decimal <= 1900:
+        c = year_decimal - 1860
+        delta = 7.62 + 0.5737*c - 0.251754*c**2 + 0.01680668*c**3 - 0.0004473624*c**4 + c**5/233174
+    elif year_decimal > 1900 and year_decimal <= 1920:
+        c = year_decimal-1900
+        delta = -2.79 + 1.494119*c - 0.0598939*c**2 + 0.0061966*c**3 - 0.000197*c**4
+    elif year_decimal > 1920 and year_decimal <= 1941:
+        c = year_decimal-1920
+        delta = 21.2 + 0.84493*c - 0.0761*c**2 + 0.0020936*c**3
+    elif year_decimal > 1941 and year_decimal <= 1961:
+        c = year_decimal-1950
+        delta = 29.07 + 0.407*c - c**2/233 + c**3/2547
+    elif year_decimal > 1961 and year_decimal <= 1986:
+        c = year_decimal-1975
+        delta = 45.45 + 1.067*c - c**2/260 - c**3/718
+    elif year_decimal > 1986 and year_decimal <= 2005:
+        c = year_decimal-2000
+        delta = 63.86 + 0.3345*c - 0.060374*c*c + 0.0017275*c**3 + 0.000651814*c**4 + 0.00002373599*c**5
+    elif year_decimal > 2005 and year_decimal <= 2050:
+        c = year_decimal-2000
+        delta = 62.92 + 0.32217*c + 0.005589*c**2
+    elif year_decimal > 2050 and year_decimal <= 2150:
+        c = (year_decimal - 1820)/100
+        delta = -20 + 32*c**2 - 0.5628*(2150 - year_decimal)
+    elif year_decimal > 2150:
+        c = (year_decimal - 1820)/100
+        delta = -20 + 32*c**2
+    
+    else:
+        return f'wrong input'
 
     if len(input)> 1 and type(input[-1]) == str:
         if input[-1] == 'S' or input[-1] == 's':      
             return delta
     return delta/86400    
 
-
 def jde(*input):
     '''
     Julian Ephemeris Day
 
     Parameter:
-    - jd
-    - Y, M, D
-    - Y, M, D, Timezone
-    - Y, M, D, H, M, S
-    - Y, M, D, h, m, s, timezone
-
+    - [1] jd
+    - [2] Y, M, D (UT)
+    - [4] Y, M, D, h (UT)
+    - [5] Y, M, D, h, timezone (LT)
+    - [6] Y, M, D, H, M, S (UT)
+    - [7] Y, M, D, h, m, s, timezone (LT)
     '''
     if len(input) == 1:
-        ...
+        julian_day = input[0]
+        deltaT = 0 # harus buat dulu fungsi konversi jd ke YMDhms
+
     elif len(input) == 3:
-        ...
+        year = input[0]; month = input[1]; day = input[2]
+        julian_day = jd(year, month, day)  # UT
+        deltaT = delta_t(year, month, day)
+
     elif len(input) == 4:
-        ...
+        year = input[0]; month = input[1]; day = input[2]
+        hour = input[3]
+        julian_day = jd(year, month, day, hour)  # UT
+        deltaT = delta_t(year, month, day) 
+
     elif len(input) == 5:
-        ...
-    elif 
+        year = input[0]; month = input[1]; day = input[2]
+        hour = input[3]; timezone = input[4]
+        julian_day = jd(year, month, day, hour, timezone)  # LT
+        deltaT = delta_t(year, month, day)
 
-    jd = jd(*input)
-    deltaT = delta_t(input[0], input[1], input[2])
+    elif len(input) == 6:
+        year = input[0]; month = input[1]; day = input[2]
+        hour = input[3]; minute = input[4]; second = input[5]
+        julian_day = jd(year, month, day, hour, minute, second)  # UT
+        deltaT = delta_t(year, month, day)
 
-    return jd + deltaT
+    elif len(input) == 7:
+        year = input[0]; month = input[1]; day = input[2]
+        hour = input[3]; minute = input[4]; second = input[5]; timezone = input[6]
+        julian_day = jd(year, month, day, hour, minute, second, timezone)  # LT
+        deltaT = delta_t(year, month, day)
 
+    else:
+        return f'wrong input'
 
+    return julian_day + deltaT
 
 
 def t_ut(*input):
     '''
-    Julian Century dalam Universal Time
+    Julian Century dalam Universal Time belum dikoreksi oleh delta T
+    digunakan untuk menentukan Greenwich Sidereal Time (GST) dan Local Sidereal Time (LST).
+    GST dan LST digunakan untuk konversi koordinat Equatorial menjadi koordinat Horizon
 
     Parameter:
-    - Julian Day (1 input)
-    - Year, month, day (3 input)
-    - Year, month, day, hour, minute, second, timezone (7 input)
+    - [1] Julian Day (1 input)
+    - [3] Year, month, day (3 input)
+    - [7] Year, month, day, hour, minute, second, timezone (7 input)
     '''
     if len(input) == 1:
-        jd = input[0]
-        return (jd - 2451545)/36525
+        _jd = input[0]
     elif len(input) >= 3 and len(input) <= 7:
-        jd = jd(*input)
-        return (jd - 2451545)/36525
+        _jd = jd(*input)
     elif len(input) > 7:
         return f'wrong input'
-
+    return (_jd - 2451545)/36525
 
 def t_td(*input):
-    ...
-
+    '''
+    Julian Ephemeris Century dalam UT sudah dikoreksi dengan Delta T
+    digunakan dalam perhitungan koreksi Nutasi, dan koreksi bulan
+    '''
+    _jde = jde(*input)
+    return (_jde - 2451545)/36525
 
 def tau(*input):
-    ...
+    '''
+    Julian Ephemeris Millenia dalam UT sudah dikoreksi dengan Delta T
+    digunakan dalam perhitungan koreksi Matahari
+    '''
+    _jde = jde(*input)
+    return (_jde - 2451545)/365250
+
+
+
