@@ -1,201 +1,109 @@
-from math import sin, cos, atan
-from khafid_fungsi import *
-from elp2000_1 import *
+# TEST ELP1
+from terms_vsop87_elp2000 import *
+from math import radians, cos, sin, atan, sqrt
+from khafid_fungsi import julian_ephemeris_day, julian_datum
 
 
-def ELP82B(tjj, R):
-    Xe = Xe + ELP01_001() + ELP01_002() + ELP01_003() + ELP01_004() + ELP01_005() + ELP01_006() + ELP01_007()
-    Xe = Xe + ELP01_008() + ELP01_009() + ELP01_010() + ELP01_011() + ELP01_012() + ELP01_013() + ELP34_001()
-    Xe = Xe + ELP04_001() + ELP04_002() + ELP04_003() + ELP04_004() + ELP04_005() + ELP07_001() + ELP22_001()
-    Xe = Xe + ELP10_001() + ELP10_002() + ELP10_003() + ELP10_004() + ELP10_005() + ELP10_006() + ELP10_007()
-    Xe = Xe + ELP10_008() + ELP10_009() + ELP10_010() + ELP10_011() + ELP10_012() + ELP10_013() + ELP10_014()
-    Xe = Xe + ELP10_015() + ELP10_016() + ELP10_017() + ELP10_018() + ELP10_019() + ELP10_020() + ELP10_021()
-    Xe = Xe + ELP10_022() + ELP10_023() + ELP10_024() + ELP10_025() + ELP10_026() + ELP10_027() + ELP10_028()
-    Xe = Xe + ELP10_029() + ELP10_030() + ELP10_031() + ELP10_032() + ELP10_033() + ELP10_034() + ELP10_035()
-    Xe = Xe + ELP10_036() + ELP10_037() + ELP10_038() + ELP10_039() + ELP10_040() + ELP10_041() + ELP10_042()
-    Xe = Xe + ELP10_043() + ELP10_044() + ELP10_045() + ELP10_046() + ELP10_047() + ELP10_048() + ELP10_049()
-    Xe = Xe + ELP10_050() + ELP10_051() + ELP10_052() + ELP10_053() + ELP10_054() + ELP10_055() + ELP10_056()
-    Xe = Xe + ELP10_057() + ELP10_058() + ELP10_059() + ELP10_060() + ELP10_061() + ELP10_062() + ELP10_063()
-    Xe = Xe + ELP10_064() + ELP10_065() + ELP10_066() + ELP10_067() + ELP10_068() + ELP10_069() + ELP10_070()
-    Xe = Xe + ELP10_071() + ELP10_072() + ELP10_073() + ELP10_074() + ELP10_075() + ELP10_076() + ELP10_077()
-    Xe = Xe + ELP10_078() + ELP10_079() + ELP10_080() + ELP10_081() + ELP10_082() + ELP10_083() + ELP10_084()
-    Xe = Xe + ELP10_085() + ELP10_086() + ELP10_087() + ELP10_088() + ELP10_089() + ELP10_090() + ELP10_091()
-    Xe = Xe + ELP10_092() + ELP10_093() + ELP10_094() + ELP10_095() + ELP10_096() + ELP10_097() + ELP10_098()
-    Xe = Xe + ELP10_099() + ELP10_100() + ELP10_101() + ELP10_102() + ELP10_103() + ELP10_104() + ELP10_105()
-    Xe = Xe + ELP10_106() + ELP10_107() + ELP10_108() + ELP10_109() + ELP10_110() + ELP10_111() + ELP10_112()
-    Xe = Xe + ELP10_113() + ELP10_114() + ELP10_115() + ELP10_116() + ELP10_117() + ELP10_118() + ELP10_119()
-    Xe = Xe + ELP10_120() + ELP10_121() + ELP10_122() + ELP10_123() + ELP10_124() + ELP10_125() + ELP10_126()
-    Xe = Xe + ELP10_127() + ELP10_128() + ELP10_129() + ELP10_130() + ELP10_131() + ELP10_132() + ELP10_133()
-    Xe = Xe + ELP10_134() + ELP10_135() + ELP10_136() + ELP10_137() + ELP10_138() + ELP10_139() + ELP10_140()
-    Xe = Xe + ELP10_141() + ELP10_142() + ELP10_143() + ELP10_144() + ELP10_145() + ELP10_146() + ELP10_147()
-    Xe = Xe + ELP10_148() + ELP10_149() + ELP10_150() + ELP10_151() + ELP10_152() + ELP10_153() + ELP10_154()
-    Xe = Xe + ELP10_155() + ELP10_156() + ELP10_157() + ELP10_158() + ELP10_159() + ELP10_160() + ELP10_161()
-    Xe = Xe + ELP10_162() + ELP10_163() + ELP10_164() + ELP10_165() + ELP10_166() + ELP10_167() + ELP10_168()
-    Xe = Xe + ELP10_169() + ELP10_170() + ELP10_171() + ELP10_172() + ELP10_173() + ELP10_174() + ELP10_175()
-    Xe = Xe + ELP10_176() + ELP10_177() + ELP10_178() + ELP10_179() + ELP10_180() + ELP28_001() + ELP31_001()
-    Xe = Xe + ELP13_001() + ELP13_002() + ELP13_003() + ELP13_004() + ELP13_005() + ELP13_006() + ELP13_007()
-    Xe = Xe + ELP13_008() + ELP13_009() + ELP13_010() + ELP13_011() + ELP13_012() + ELP13_013() + ELP13_014()
-    Xe = Xe + ELP13_015() + ELP13_016() + ELP13_017() + ELP13_018() + ELP13_019() + ELP13_020() + ELP13_021()
-    Xe = Xe + ELP13_022() + ELP13_023() + ELP13_024() + ELP13_025() + ELP13_026() + ELP13_027() + ELP13_028()
-    Xe = Xe + ELP13_029() + ELP13_030() + ELP13_031() + ELP13_032() + ELP13_033() + ELP13_034() + ELP13_035()
-    Xe = Xe + ELP13_036() + ELP13_037() + ELP13_038() + ELP13_039() + ELP13_040() + ELP13_041() + ELP13_042()
-    Xe = Xe + ELP13_043() + ELP13_044() + ELP13_045() + ELP13_046() + ELP13_047() + ELP13_048() + ELP13_049()
-    Xe = Xe + ELP13_050() + ELP13_051() + ELP13_052() + ELP13_053() + ELP13_054() + ELP13_055() + ELP25_001()
-    Xe = Xe + ELP16_001() + ELP16_002() + ELP16_003() + ELP19_001() + ELP19_002() + ELP19_003()
-    
-    Ye = Ye + ELP02_001() + ELP02_002() + ELP02_003() + ELP02_004() + ELP02_005() + ELP02_006() + ELP02_007()
-    Ye = Ye + ELP02_008() + ELP02_009() + ELP02_010() + ELP02_011() + ELP02_012() + ELP32_001() + ELP35_001()
-    Ye = Ye + ELP05_001() + ELP05_002() + ELP05_003() + ELP05_004() + ELP08_001() + ELP29_001() + ELP26_001()
-    Ye = Ye + ELP11_001() + ELP11_002() + ELP11_003() + ELP11_004() + ELP11_005() + ELP11_006() + ELP11_007()
-    Ye = Ye + ELP11_008() + ELP11_009() + ELP11_010() + ELP11_011() + ELP11_012() + ELP11_013() + ELP11_014()
-    Ye = Ye + ELP11_015() + ELP11_016() + ELP11_017() + ELP11_018() + ELP11_019() + ELP11_020() + ELP11_021()
-    Ye = Ye + ELP11_022() + ELP11_023() + ELP11_024() + ELP11_025() + ELP11_026() + ELP11_027() + ELP11_028()
-    Ye = Ye + ELP11_029() + ELP11_030() + ELP11_031() + ELP11_032() + ELP11_033() + ELP11_034() + ELP11_035()
-    Ye = Ye + ELP11_036() + ELP11_037() + ELP11_038() + ELP11_039() + ELP11_040() + ELP11_041() + ELP11_042()
-    Ye = Ye + ELP11_043() + ELP11_044() + ELP11_045() + ELP11_046() + ELP11_047() + ELP11_048() + ELP11_049()
-    Ye = Ye + ELP11_050() + ELP11_051() + ELP11_052() + ELP11_053() + ELP11_054() + ELP11_055() + ELP11_056()
-    Ye = Ye + ELP11_057() + ELP11_058() + ELP11_059() + ELP11_060() + ELP11_061() + ELP11_062() + ELP11_063()
-    Ye = Ye + ELP11_064() + ELP11_065() + ELP11_066() + ELP14_001() + ELP14_002() + ELP14_003() + ELP14_004()
-    Ye = Ye + ELP14_005() + ELP14_006() + ELP14_007() + ELP14_008() + ELP14_009() + ELP14_010() + ELP14_011()
-    Ye = Ye + ELP17_001() + ELP17_002() + ELP20_001() + ELP20_002() + ELP20_003() + ELP23_001()
-
-    Ze = Ze + ELP03_001() + ELP03_002() + ELP03_003() + ELP03_004() + ELP03_005() + ELP03_006() + ELP03_007()
-    Ze = Ze + ELP03_008() + ELP03_009() + ELP06_001() + ELP06_002() + ELP06_003() + ELP09_001() + ELP33_001()
-    Ze = Ze + ELP12_001() + ELP12_002() + ELP12_003() + ELP12_004() + ELP12_005() + ELP12_006() + ELP12_007()
-    Ze = Ze + ELP12_008() + ELP12_009() + ELP12_010() + ELP12_011() + ELP12_012() + ELP12_013() + ELP12_014()
-    Ze = Ze + ELP12_015() + ELP12_016() + ELP12_017() + ELP12_018() + ELP12_019() + ELP12_020() + ELP12_021()
-    Ze = Ze + ELP12_022() + ELP12_023() + ELP12_024() + ELP12_025() + ELP12_026() + ELP12_027() + ELP12_028()
-    Ze = Ze + ELP12_029() + ELP12_030() + ELP12_031() + ELP12_032() + ELP12_033() + ELP12_034() + ELP12_035()
-    Ze = Ze + ELP12_036() + ELP12_037() + ELP12_038() + ELP12_039() + ELP12_040() + ELP12_041() + ELP12_042()
-    Ze = Ze + ELP12_043() + ELP12_044() + ELP12_045() + ELP12_046() + ELP12_047() + ELP12_048() + ELP12_049()
-    Ze = Ze + ELP12_050() + ELP12_051() + ELP12_052() + ELP12_053() + ELP12_054() + ELP12_055() + ELP12_056()
-    Ze = Ze + ELP12_057() + ELP12_058() + ELP12_059() + ELP12_060() + ELP12_061() + ELP12_062() + ELP12_063()
-    Ze = Ze + ELP12_064() + ELP12_065() + ELP12_066() + ELP12_067() + ELP12_068() + ELP12_069() + ELP12_070()
-    Ze = Ze + ELP12_071() + ELP12_072() + ELP12_073() + ELP12_074() + ELP12_075() + ELP12_076() + ELP12_077()
-    Ze = Ze + ELP12_078() + ELP12_079() + ELP12_080() + ELP12_081() + ELP12_082() + ELP12_083() + ELP36_001()
-    Ze = Ze + ELP15_001() + ELP15_002() + ELP15_003() + ELP15_004() + ELP15_005() + ELP15_006() + ELP15_007()
-    Ze = Ze + ELP15_008() + ELP15_009() + ELP15_010() + ELP15_011() + ELP15_012() + ELP15_013() + ELP15_014()
-    Ze = Ze + ELP15_015() + ELP15_016() + ELP15_017() + ELP15_018() + ELP15_019() + ELP15_020() + ELP15_021()
-    Ze = Ze + ELP15_022() + ELP18_001() + ELP18_002() + ELP21_001() + ELP21_002() + ELP21_003() + ELP24_001()
-    Ze = Ze + ELP27_001() + ELP30_001()
-
-    Xe = Xe / rad + w[0][0] + w[0][1] * T2 + w[0][2] * T3 + w[0][3] * T4 + w[0][6] * T5
-    Ye = Ye / rad
-    Ze = Ze * a0 / ath
-    X1 = Ze * cos(Ye)
-    X2 = X1 * sin(Xe)
-    X1 = X1 * cos(Xe)
-    X3 = Ze * sin(Ye)
-    pw = (p1 + p2 * T2 + p3 * T3 + p4 * T4 + p5 * T5) * T2
-    qw = (q1 + q2 * T2 + q3 * T3 + q4 * T4 + q5 * T5) * T2
-    RA = 2 * sqrt(1 - pw * pw - qw * qw)
-    pwqw = 2 * pw * qw
-    pw2 = 1 - 2 * pw * pw
-    qw2 = 1 - 2 * qw * qw
-    pw = pw * RA
-    qw = qw * RA
-    #R[0] = 
-    R = [pw2 * X1 + pwqw * X2 + pw * X3, pwqw * X1 + qw2 * X2 - qw * X3, -pw * X1 + qw * X2 + (pw2 + qw2 - 1) * X3]
-
-    print(R)
-
-
-def initialisasi_elements1(tjj):
-    cpi = 4 * atan(1)
-    cpi2 = 2 * cpi
-    pis2 = cpi / 2
+def ELP2000(tjj):
+    cpi = 4*atan(1)
+    cpi2 = 2*cpi
+    pis2 = cpi/2
         
-    rad = 648000 / cpi
-    deg = cpi / 180
+    rad = 648000/cpi
+    deg = cpi/180
     c1 = 60
     c2 = 3600
     ath = 384747.980674317
     a0 = 384747.980644895
     am = 0.074801329518
     alfa = 0.002571881335
-    dtasm = 2 * alfa / (3 * am)
+    dtasm = 2*alfa/(3*am)
 
-#   Lunar arguments.
-    w[0][0] = (218 + 18 / c1 + 59.95571 / c2) * deg
-    w[1][0] = (83 + 21 / c1 + 11.67475 / c2) * deg
-    w[2][0] = (125 + 2 / c1 + 40.39816 / c2) * deg
-    eart[0] = (100 + 27 / c1 + 59.22059 / c2) * deg
-    peri[0] = (102 + 56 / c1 + 14.42753 / c2) * deg
-    w[0][1] = 1732559343.73604 / rad
-    w[1][1] = 14643420.2632 / rad
-    w[2][1] = -6967919.3622 / rad
-    eart(2) = 129597742.2758 / rad
-    peri(2) = 1161.2283 / rad
-    w(1, 3) = -5.8883 / rad
-    w(2, 3) = -38.2776 / rad
-    w(3, 3) = 6.3622 / rad
-    eart(3) = -0.0202 / rad
-    peri(3) = 0.5327 / rad
-    w(1, 4) = 0.006604 / rad
-    w(2, 4) = -0.045047 / rad
-    w(3, 4) = 0.007625 / rad
-    eart(4) = 0.000009 / rad
-    peri(4) = -0.000138 / rad
-    w(1, 5) = -0.00003169 / rad
-    w(2, 5) = 0.00021301 / rad
-    w(3, 5) = -0.00003586 / rad
-    eart(5) = 0.00000015 / rad
-    peri(5) = 0
+    #  Lunar arguments.
+    w = [
+            [(218 + 18/c1 + 59.95571/c2)*deg, 1732559343.73604/rad, -5.8883/rad, 0.006604/rad, -0.00003169/rad],
+            [(83 + 21/c1 + 11.67475/c2)*deg, 14643420.2632/rad, -38.2776/rad, -0.045047/rad, 0.00021301/rad], 
+            [(125 + 2/c1 + 40.39816/c2)*deg, -6967919.3622/rad, 6.3622/rad, 0.007625/rad, -0.00003586/rad]
+        ]
 
-#   Planetary arguments.
-    preces = 5029.0966 / rad
-    p11 = (252 + 15 / c1 + 3.25986 / c2) * deg
-    p21 = (181 + 58 / c1 + 47.28305 / c2) * deg
-    p31 = eart(1)
-    p41 = (355 + 25 / c1 + 59.78866 / c2) * deg
-    p51 = (34 + 21 / c1 + 5.34212 / c2) * deg
-    p61 = (50 + 4 / c1 + 38.89694 / c2) * deg
-    p71 = (314 + 3 / c1 + 18.01841 / c2) * deg
-    p81 = (304 + 20 / c1 + 55.19575 / c2) * deg
-    p12 = 538101628.68898 / rad
-    p22 = 210664136.43355 / rad
-    p32 = eart(2)
-    p42 = 68905077.59284 / rad
-    p52 = 10925660.42861 / rad
-    p62 = 4399609.65932 / rad
-    p72 = 1542481.19393 / rad
-    p82 = 786550.32074 / rad
+    eart = [(100 + 27/c1 + 59.22059/c2)*deg, 129597742.2758/rad, -0.0202/rad, 0.000009/rad, 0.00000015/rad]
+    peri = [(102 + 56/c1 + 14.42753/c2)*deg, 1161.2283/rad, 0.5327/rad, -0.000138/rad, 0]
 
-#   Corrections of the constants (fit to DE200/LE200).
-    delnu = 0.55604 / rad / w(1, 2)
-    dele = 0.01789 / rad
-    delg = -0.08066 / rad
-    delnp = -0.06424 / rad / w(1, 2)
-    delep = -0.12879 / rad
 
-#   Delaunay's arguments.
-    d11 = w(1, 1) - eart(1)
-    d41 = w(1, 1) - w(3, 1)
-    d31 = w(1, 1) - w(2, 1)
-    d21 = eart(1) - peri(1)
-    d12 = w(1, 2) - eart(2)
-    d42 = w(1, 2) - w(3, 2)
-    d32 = w(1, 2) - w(2, 2)
-    d22 = eart(2) - peri(2)
-    d13 = w(1, 3) - eart(3)
-    d43 = w(1, 3) - w(3, 3)
-    d33 = w(1, 3) - w(2, 3)
-    d23 = eart(3) - peri(3)
-    d14 = w(1, 4) - eart(4)
-    d44 = w(1, 4) - w(3, 4)
-    d34 = w(1, 4) - w(2, 4)
-    d24 = eart(4) - peri(4)
-    d15 = w(1, 5) - eart(5)
-    d45 = w(1, 5) - w(3, 5)
-    d35 = w(1, 5) - w(2, 5)
-    d25 = eart(5) - peri(5)
+    # Planetary arguments.
+    preces = 5029.0966/rad
+    p11 = (252 + 15/c1 + 3.25986/c2)*deg
+    p21 = (181 + 58/c1 + 47.28305/c2)*deg
+    p31 = eart[0]
+    p41 = (355 + 25/c1 + 59.78866/c2)*deg
+    p51 = (34 + 21/c1 + 5.34212/c2)*deg
+    p61 = (50 + 4/c1 + 38.89694/c2)*deg
+    p71 = (314 + 3/c1 + 18.01841/c2)*deg
+    p81 = (304 + 20/c1 + 55.19575/c2)*deg
+    p12 = 538101628.68898/rad
+    p22 = 210664136.43355/rad
+    p32 = eart[1]
+    p42 = 68905077.59284/rad
+    p52 = 10925660.42861/rad
+    p62 = 4399609.65932/rad
+    p72 = 1542481.19393/rad
+    p82 = 786550.32074/rad
+
+    #Corrections of the constants (fit to DE200/LE200).
+    delnu = 0.55604/rad/w[0][1]
+    dele = 0.01789/rad
+    delg = -0.08066/rad
+    delnp = -0.06424/rad/w[0][1]
+    delep = -0.12879/rad
+
+    #Delaunays arguments.
+
+    d11 = w[0][0] - eart[0]
+    d41 = w[0][0] - w[2][0]
+    d31 = w[0][0] - w[1][0]
+    d21 = eart[0] - peri[0]
+    d12 = w[0][1] - eart[1]
+    d42 = w[0][1] - w[2][1]
+    d32 = w[0][1] - w[1][1]
+    d22 = eart[1] - peri[1]
+    d13 = w[0][2] - eart[2]
+    d43 = w[0][2] - w[2][2]
+    d33 = w[0][2] - w[1][2]
+    d23 = eart[2] - peri[2]
+    d14 = w[0][3] - eart[3]
+    d44 = w[0][3] - w[2][3]
+    d34 = w[0][3] - w[1][3]
+    d24 = eart[3] - peri[3]
+    d15 = w[0][4] - eart[4]
+    d45 = w[0][4] - w[2][4]
+    d35 = w[0][4] - w[1][4]
+    d25 = eart[4] - peri[4]
     
-    
+
     d11 = d11 + cpi
-    z1 = w(1, 1)
-    z2 = w(1, 2) + preces
+    z1 = w[0][0]
+    z2 = w[0][1] + preces
 
-#    Precession matrix.
+
+    #  matrix nilai delaunays argument
+    # matrix_delaunays = [
+    #     [d11, d12, d13, d14, d15],
+    #     [d21, d22, d23, d24, d25],
+    #     [d31, d32, d33, d34, d35],
+    #     [d41, d42, d43, d44, d45],
+        
+    # ]
+
+    matrix_delaunays = [
+        [d11, d21, d31, d41],
+        [d12, d22, d32, d42],
+        [d13, d23, d33, d43],
+        [d14, d24, d34, d44],
+        [d15, d25, d35, d45]
+    ]
+
+    #  Precession matrix.
+
     p1 = 0.000010180391
     p2 = 0.00000047020439
     p3 = -5.417367E-10
@@ -208,10 +116,329 @@ def initialisasi_elements1(tjj):
     q5 = -3.20334E-15
 
     T1 = 1
-    T2 = (tjj - 2451545) / 36525
-    T3 = T2 * T2
-    T4 = T3 * T2
-    T5 = T4 * T2
+
+    T2 = (tjj - 2451545)/36525
+    T3 = T2*T2
+    T4 = T3*T2
+    T5 = T4*T2
+
+    Xe = Ye = Ze = 0
+
+    elp1 = ELP200082B_ELP1
+    for i in range(len(elp1)):
+        Y = 0
+        Y += elp1[i][0]*d11*T1 + elp1[i][1]*d21*T1 + elp1[i][2]*d31*T1 +elp1[i][3]*d41*T1
+        Y += elp1[i][0]*d12*T2 + elp1[i][1]*d22*T2 + elp1[i][2]*d32*T2 +elp1[i][3]*d42*T2
+        Y += elp1[i][0]*d13*T3 + elp1[i][1]*d23*T3 + elp1[i][2]*d33*T3 +elp1[i][3]*d43*T3
+        Y += elp1[i][0]*d14*T4 + elp1[i][1]*d24*T4 + elp1[i][2]*d34*T4 +elp1[i][3]*d44*T4
+        Y += elp1[i][0]*d15*T5 + elp1[i][1]*d25*T5 + elp1[i][2]*d35*T5 +elp1[i][3]*d45*T5
+        Xe += (elp1[i][4] + (elp1[i][5] + dtasm*elp1[i][9])*(delnp - am*delnu) + elp1[i][6]*delg + elp1[i][7]*dele + elp1[i][8]*delep)*sin(Y)
+
+    elp2 = ELP200082B_ELP2
+    for i in range(len(elp2)):
+        Y = 0
+        Y += elp2[i][0]*d11*T1 + elp2[i][1]*d21*T1 + elp2[i][2]*d31*T1 +elp2[i][3]*d41*T1
+        Y += elp2[i][0]*d12*T2 + elp2[i][1]*d22*T2 + elp2[i][2]*d32*T2 +elp2[i][3]*d42*T2
+        Y += elp2[i][0]*d13*T3 + elp2[i][1]*d23*T3 + elp2[i][2]*d33*T3 +elp2[i][3]*d43*T3
+        Y += elp2[i][0]*d14*T4 + elp2[i][1]*d24*T4 + elp2[i][2]*d34*T4 +elp2[i][3]*d44*T4
+        Y += elp2[i][0]*d15*T5 + elp2[i][1]*d25*T5 + elp2[i][2]*d35*T5 +elp2[i][3]*d45*T5
+        Ye += (elp2[i][4] + (elp2[i][5] + dtasm*elp2[i][9])*(delnp - am*delnu) + elp2[i][6]*delg + elp2[i][7]*dele + elp2[i][8]*delep)*sin(Y)
+
+    elp3 = ELP200082B_ELP3
+    for i in range(len(elp3)):
+        Y = 0
+        Y += elp3[i][0]*d11*T1 + elp3[i][1]*d21*T1 + elp3[i][2]*d31*T1 + elp3[i][3]*d41*T1
+        Y += elp3[i][0]*d12*T2 + elp3[i][1]*d22*T2 + elp3[i][2]*d32*T2 + elp3[i][3]*d42*T2
+        Y += elp3[i][0]*d13*T3 + elp3[i][1]*d23*T3 + elp3[i][2]*d33*T3 + elp3[i][3]*d43*T3
+        Y += elp3[i][0]*d14*T4 + elp3[i][1]*d24*T4 + elp3[i][2]*d34*T4 + elp3[i][3]*d44*T4
+        Y += elp3[i][0]*d15*T5 + elp3[i][1]*d25*T5 + elp3[i][2]*d35*T5 + elp3[i][3]*d45*T5
+        Ze += (elp3[i][4] + (elp3[i][5] + dtasm*elp3[i][9])*(delnp - am*delnu) + elp3[i][6]*delg + elp3[i][7]*dele + elp3[i][8]*delep)*cos(Y)
+
+    elp4 = ELP200082B_ELP4
+    for i in range(len(elp4)):
+        Y = 0
+        Y += radians(elp4[i][5]) + elp4[i][0]*z1*T1 + elp4[i][1]*d11*T1 + elp4[i][2]*d21*T1 + elp4[i][3]*d31*T1 + elp4[i][4]*d41*T1
+        Y += elp4[i][0]*z2*T2 + elp4[i][1]*d12*T2 + elp4[i][2]*d22*T2 + elp4[i][3]*d32*T2 + elp4[i][4]*d42*T2
+        Xe += elp4[i][6]*sin(Y)
+
+    elp5 = ELP200082B_ELP5
+    for i in range(len(elp5)):
+        Y = 0
+        Y += radians(elp5[i][5]) + elp5[i][0]*z1*T1 + elp5[i][1]*d11*T1 + elp5[i][2]*d21*T1 + elp5[i][3]*d31*T1 + elp5[i][4]*d41*T1
+        Y += elp5[i][0]*z2*T2 + elp5[i][1]*d12*T2 + elp5[i][2]*d22*T2 + elp5[i][3]*d32*T2 + elp5[i][4]*d42*T2
+        Ye += elp5[i][6]*sin(Y)
+
+    elp6 = ELP200082B_ELP6
+    for i in range(len(elp6)):
+        Y = 0
+        Y += radians(elp6[i][5]) + elp6[i][0]*z1*T1 + elp6[i][1]*d11*T1 + elp6[i][2]*d21*T1 + elp6[i][3]*d31*T1 + elp6[i][4]*d41*T1
+        Y += elp6[i][0]*z2*T2 + elp6[i][1]*d12*T2 + elp6[i][2]*d22*T2 + elp6[i][3]*d32*T2 + elp6[i][4]*d42*T2
+        Ze += elp6[i][6]*sin(Y)
+
+    elp7 = ELP200082B_ELP7
+    for i in range(len(elp7)):
+        Y = 0
+        Y += radians(elp7[i][5]) + elp7[i][0]*z1*T1 + elp7[i][1]*d11*T1 + elp7[i][2]*d21*T1 + elp7[i][3]*d31*T1 + elp7[i][4]*d41*T1
+        Y += elp7[i][0]*z2*T2 + elp7[i][1]*d12*T2 + elp7[i][2]*d22*T2 + elp7[i][3]*d32*T2 + elp7[i][4]*d42*T2
+        Xe += elp7[i][6]*T2*sin(Y)
+
+    elp8 = ELP200082B_ELP8
+    for i in range(len(elp8)):
+        Y = 0
+        Y += radians(elp8[i][5]) + elp8[i][0]*z1*T1 + elp8[i][1]*d11*T1 + elp8[i][2]*d21*T1 + elp8[i][3]*d31*T1 + elp8[i][4]*d41*T1
+        Y += elp8[i][0]*z2*T2 + elp8[i][1]*d12*T2 + elp8[i][2]*d22*T2 + elp8[i][3]*d32*T2 + elp8[i][4]*d42*T2
+        Ye += elp8[i][6]*T2*sin(Y)
+
+    elp9 = ELP200082B_ELP9
+    for i in range(len(elp9)):
+        Y = 0
+        Y += radians(elp9[i][5]) + elp9[i][0]*z1*T1 + elp9[i][1]*d11*T1 + elp9[i][2]*d21*T1 + elp9[i][3]*d31*T1 + elp9[i][4]*d41*T1
+        Y += elp9[i][0]*z2*T2 + elp9[i][1]*d12*T2 + elp9[i][2]*d22*T2 + elp9[i][3]*d32*T2 + elp9[i][4]*d42*T2
+        Ze += elp9[i][6]*T2*sin(Y)
+ 
+    elp10 = ELP200082B_ELP10
+    for i in range(len(elp10)):
+        Y = 0
+        Y += elp10[i][11]*deg
+        Y += elp10[i][0]*p11*T1 + elp10[i][1]*p21*T1 + elp10[i][2]*p31*T1 + elp10[i][3]*p41*T1 + elp10[i][4]*p51*T1 + elp10[i][5]*p61*T1 + elp10[i][6]*p71*T1 + elp10[i][7]*p81*T1 + elp10[i][8]*d11*T1 + elp10[i][9]*d31*T1 + elp10[i][10]*d41*T1
+        Y += elp10[i][0]*p12*T2 + elp10[i][1]*p22*T2 + elp10[i][2]*p32*T2 + elp10[i][3]*p42*T2 + elp10[i][4]*p52*T2 + elp10[i][5]*p62*T2 + elp10[i][6]*p72*T2 + elp10[i][7]*p82*T2 + elp10[i][8]*d12*T2 + elp10[i][9]*d32*T2 + elp10[i][10]*d42*T2
+        Xe += elp10[i][12]*sin(Y)
+
+    elp11 = ELP200082B_ELP11
+    for i in range(len(elp11)):
+        Y = 0
+        Y += elp11[i][11]*deg
+        Y += elp11[i][0]*p11*T1 + elp11[i][1]*p21*T1 + elp11[i][2]*p31*T1 + elp11[i][3]*p41*T1 + elp11[i][4]*p51*T1 + elp11[i][5]*p61*T1 + elp11[i][6]*p71*T1 + elp11[i][7]*p81*T1 + elp11[i][8]*d11*T1 + elp11[i][9]*d31*T1 + elp11[i][10]*d41*T1
+        Y += elp11[i][0]*p12*T2 + elp11[i][1]*p22*T2 + elp11[i][2]*p32*T2 + elp11[i][3]*p42*T2 + elp11[i][4]*p52*T2 + elp11[i][5]*p62*T2 + elp11[i][6]*p72*T2 + elp11[i][7]*p82*T2 + elp11[i][8]*d12*T2 + elp11[i][9]*d32*T2 + elp11[i][10]*d42*T2
+        Ye += elp11[i][12]*sin(Y)
+
+    elp12 = ELP200082B_ELP12
+    for i in range(len(elp12)):
+        Y = 0
+        Y += elp12[i][11]*deg
+        Y += elp12[i][0]*p11*T1 + elp12[i][1]*p21*T1 + elp12[i][2]*p31*T1 + elp12[i][3]*p41*T1 + elp12[i][4]*p51*T1 + elp12[i][5]*p61*T1 + elp12[i][6]*p71*T1 + elp12[i][7]*p81*T1 + elp12[i][8]*d11*T1 + elp12[i][9]*d31*T1 + elp12[i][10]*d41*T1
+        Y += elp12[i][0]*p12*T2 + elp12[i][1]*p22*T2 + elp12[i][2]*p32*T2 + elp12[i][3]*p42*T2 + elp12[i][4]*p52*T2 + elp12[i][5]*p62*T2 + elp12[i][6]*p72*T2 + elp12[i][7]*p82*T2 + elp12[i][8]*d12*T2 + elp12[i][9]*d32*T2 + elp12[i][10]*d42*T2
+        Ze += elp12[i][12]*sin(Y)
+
+    elp13 = ELP200082B_ELP13
+    for i in range(len(elp13)):
+        Y = 0
+        Y += elp13[i][11]*deg
+        Y += elp13[i][0]*p11*T1 + elp13[i][1]*p21*T1 + elp13[i][2]*p31*T1 + elp13[i][3]*p41*T1 + elp13[i][4]*p51*T1 + elp13[i][5]*p61*T1 + elp13[i][6]*p71*T1 + elp13[i][7]*p81*T1 + elp13[i][8]*d11*T1 + elp13[i][9]*d31*T1 + elp13[i][10]*d41*T1
+        Y += elp13[i][0]*p12*T2 + elp13[i][1]*p22*T2 + elp13[i][2]*p32*T2 + elp13[i][3]*p42*T2 + elp13[i][4]*p52*T2 + elp13[i][5]*p62*T2 + elp13[i][6]*p72*T2 + elp13[i][7]*p82*T2 + elp13[i][8]*d12*T2 + elp13[i][9]*d32*T2 + elp13[i][10]*d42*T2
+        Xe += elp13[i][12]*T2*sin(Y)
+
+    elp14 = ELP200082B_ELP14
+    for i in range(len(elp14)):
+        Y = 0
+        Y += elp14[i][11]*deg
+        Y += elp14[i][0]*p11*T1 + elp14[i][1]*p21*T1 + elp14[i][2]*p31*T1 + elp14[i][3]*p41*T1 + elp14[i][4]*p51*T1 + elp14[i][5]*p61*T1 + elp14[i][6]*p71*T1 + elp14[i][7]*p81*T1 + elp14[i][8]*d11*T1 + elp14[i][9]*d31*T1 + elp14[i][10]*d41*T1
+        Y += elp14[i][0]*p12*T2 + elp14[i][1]*p22*T2 + elp14[i][2]*p32*T2 + elp14[i][3]*p42*T2 + elp14[i][4]*p52*T2 + elp14[i][5]*p62*T2 + elp14[i][6]*p72*T2 + elp14[i][7]*p82*T2 + elp14[i][8]*d12*T2 + elp14[i][9]*d32*T2 + elp14[i][10]*d42*T2
+        Ye += elp14[i][12]*T2*sin(Y)
+
+    elp15 = ELP200082B_ELP15
+    for i in range(len(elp15)):
+        Y = 0
+        Y += elp15[i][11]*deg
+        Y += elp15[i][0]*p11*T1 + elp15[i][1]*p21*T1 + elp15[i][2]*p31*T1 + elp15[i][3]*p41*T1 + elp15[i][4]*p51*T1 + elp15[i][5]*p61*T1 + elp15[i][6]*p71*T1 + elp15[i][7]*p81*T1 + elp15[i][8]*d11*T1 + elp15[i][9]*d31*T1 + elp15[i][10]*d41*T1
+        Y += elp15[i][0]*p12*T2 + elp15[i][1]*p22*T2 + elp15[i][2]*p32*T2 + elp15[i][3]*p42*T2 + elp15[i][4]*p52*T2 + elp15[i][5]*p62*T2 + elp15[i][6]*p72*T2 + elp15[i][7]*p82*T2 + elp15[i][8]*d12*T2 + elp15[i][9]*d32*T2 + elp15[i][10]*d42*T2
+        Ze += (elp15[i][12])*T2*sin(Y)
+
+    elp16 = ELP200082B_ELP16
+    for i in range(len(elp16)):
+        Y = 0
+        Y += elp16[i][11]*deg
+        Y += elp16[i][0]*p11*T1 + elp16[i][1]*p21*T1 + elp16[i][2]*p31*T1 + elp16[i][3]*p41*T1 + elp16[i][4]*p51*T1 + elp16[i][5]*p61*T1 + elp16[i][6]*p71*T1 + elp16[i][7]*d11*T1 + elp16[i][8]*d21*T1 + elp16[i][9]*d31*T1 + elp16[i][10]*d41*T1
+        Y += elp16[i][0]*p12*T2 + elp16[i][1]*p22*T2 + elp16[i][2]*p32*T2 + elp16[i][3]*p42*T2 + elp16[i][4]*p52*T2 + elp16[i][5]*p62*T2 + elp16[i][6]*p72*T2 + elp16[i][7]*d12*T2 + elp16[i][8]*d22*T2 + elp16[i][9]*d32*T2 + elp16[i][10]*d42*T2
+        Xe += elp16[i][12]*sin(Y)
+
+    elp17 = ELP200082B_ELP17
+    for i in range(len(elp17)):
+        Y = 0
+        Y += elp17[i][11]*deg
+        Y += elp17[i][0]*p11*T1 + elp17[i][1]*p21*T1 + elp17[i][2]*p31*T1 + elp17[i][3]*p41*T1 + elp17[i][4]*p51*T1 + elp17[i][5]*p61*T1 + elp17[i][6]*p71*T1 + elp17[i][7]*d11*T1 + elp17[i][8]*d21*T1 + elp17[i][9]*d31*T1 + elp17[i][10]*d41*T1
+        Y += elp17[i][0]*p12*T2 + elp17[i][1]*p22*T2 + elp17[i][2]*p32*T2 + elp17[i][3]*p42*T2 + elp17[i][4]*p52*T2 + elp17[i][5]*p62*T2 + elp17[i][6]*p72*T2 + elp17[i][7]*d12*T2 + elp17[i][8]*d22*T2 + elp17[i][9]*d32*T2 + elp17[i][10]*d42*T2
+        Ye += elp17[i][12]*sin(Y)
+
+    elp18 = ELP200082B_ELP18
+    for i in range(len(elp18)):
+        Y = 0
+        Y += elp18[i][11]*deg
+        Y += elp18[i][0]*p11*T1 + elp18[i][1]*p21*T1 + elp18[i][2]*p31*T1 + elp18[i][3]*p41*T1 + elp18[i][4]*p51*T1 + elp18[i][5]*p61*T1 + elp18[i][6]*p71*T1 + elp18[i][7]*d11*T1 + elp18[i][8]*d21*T1 + elp18[i][9]*d31*T1 + elp18[i][10]*d41*T1
+        Y += elp18[i][0]*p12*T2 + elp18[i][1]*p22*T2 + elp18[i][2]*p32*T2 + elp18[i][3]*p42*T2 + elp18[i][4]*p52*T2 + elp18[i][5]*p62*T2 + elp18[i][6]*p72*T2 + elp18[i][7]*d12*T2 + elp18[i][8]*d22*T2 + elp18[i][9]*d32*T2 + elp18[i][10]*d42*T2
+        Ze += elp18[i][12]*sin(Y)
+
+    elp19 = ELP200082B_ELP19
+    for i in range(len(elp19)):
+        Y = 0
+        Y += elp19[i][11]*deg
+        Y += elp19[i][0]*p11*T1 + elp19[i][1]*p21*T1 + elp19[i][2]*p31*T1 + elp19[i][3]*p41*T1 + elp19[i][4]*p51*T1 + elp19[i][5]*p61*T1 + elp19[i][6]*p71*T1 + elp19[i][7]*d11*T1 + elp19[i][8]*d21*T1 + elp19[i][9]*d31*T1 + elp19[i][10]*d41*T1
+        Y += elp19[i][0]*p12*T2 + elp19[i][1]*p22*T2 + elp19[i][2]*p32*T2 + elp19[i][3]*p42*T2 + elp19[i][4]*p52*T2 + elp19[i][5]*p62*T2 + elp19[i][6]*p72*T2 + elp19[i][7]*d12*T2 + elp19[i][8]*d22*T2 + elp19[i][9]*d32*T2 + elp19[i][10]*d42*T2
+        Xe += elp19[i][12]*T2*sin(Y)
+
+    elp20 = ELP200082B_ELP20
+    for i in range(len(elp20)):
+        Y = 0
+        Y += elp20[i][11]*deg
+        Y += elp20[i][0]*p11*T1 + elp20[i][1]*p21*T1 + elp20[i][2]*p31*T1 + elp20[i][3]*p41*T1 + elp20[i][4]*p51*T1 + elp20[i][5]*p61*T1 + elp20[i][6]*p71*T1 + elp20[i][7]*d11*T1 + elp20[i][8]*d21*T1 + elp20[i][9]*d31*T1 + elp20[i][10]*d41*T1
+        Y += elp20[i][0]*p12*T2 + elp20[i][1]*p22*T2 + elp20[i][2]*p32*T2 + elp20[i][3]*p42*T2 + elp20[i][4]*p52*T2 + elp20[i][5]*p62*T2 + elp20[i][6]*p72*T2 + elp20[i][7]*d12*T2 + elp20[i][8]*d22*T2 + elp20[i][9]*d32*T2 + elp20[i][10]*d42*T2
+        Ye += elp20[i][12]*T2*sin(Y)
+
+    elp21 = ELP200082B_ELP21
+    for i in range(len(elp21)):
+        Y = 0
+        Y += elp21[i][11]*deg
+        Y += elp21[i][0]*p11*T1 + elp21[i][1]*p21*T1 + elp21[i][2]*p31*T1 + elp21[i][3]*p41*T1 + elp21[i][4]*p51*T1 + elp21[i][5]*p61*T1 + elp21[i][6]*p71*T1 + elp21[i][7]*d11*T1 + elp21[i][8]*d21*T1 + elp21[i][9]*d31*T1 + elp21[i][10]*d41*T1
+        Y += elp21[i][0]*p12*T2 + elp21[i][1]*p22*T2 + elp21[i][2]*p32*T2 + elp21[i][3]*p42*T2 + elp21[i][4]*p52*T2 + elp21[i][5]*p62*T2 + elp21[i][6]*p72*T2 + elp21[i][7]*d12*T2 + elp21[i][8]*d22*T2 + elp21[i][9]*d32*T2 + elp21[i][10]*d42*T2
+        Ze += (elp21[i][12])*T2*sin(Y)
+
+    elp22 = ELP200082B_ELP22
+    for i in range(len(elp22)):
+        Y = 0
+        Y += radians(elp22[i][5]) + elp22[i][0]*z1*T1 + elp22[i][1]*d11*T1 + elp22[i][2]*d21*T1 + elp22[i][3]*d31*T1 + elp22[i][4]*d41*T1
+        Y += elp22[i][0]*z2*T2 + elp22[i][1]*d12*T2 + elp22[i][2]*d22*T2 + elp22[i][3]*d32*T2 + elp22[i][4]*d42*T2
+        Xe += elp22[i][6]*sin(Y)
+
+    elp23 = ELP200082B_ELP23
+    for i in range(len(elp23)):
+        Y = 0
+        Y += radians(elp23[i][5]) + elp23[i][0]*z1*T1 + elp23[i][1]*d11*T1 + elp23[i][2]*d21*T1 + elp23[i][3]*d31*T1 + elp23[i][4]*d41*T1
+        Y += elp23[i][0]*z2*T2 + elp23[i][1]*d12*T2 + elp23[i][2]*d22*T2 + elp23[i][3]*d32*T2 + elp23[i][4]*d42*T2
+        Ye += elp23[i][6]*sin(Y)
+
+    elp24 = ELP200082B_ELP24
+    for i in range(len(elp24)):
+        Y = 0
+        Y += radians(elp24[i][5]) + elp24[i][0]*z1*T1 + elp24[i][1]*d11*T1 + elp24[i][2]*d21*T1 + elp24[i][3]*d31*T1 + elp24[i][4]*d41*T1
+        Y += elp24[i][0]*z2*T2 + elp24[i][1]*d12*T2 + elp24[i][2]*d22*T2 + elp24[i][3]*d32*T2 + elp24[i][4]*d42*T2
+        Ze += elp24[i][6]*sin(Y)
+
+    elp25 = ELP200082B_ELP25
+    for i in range(len(elp25)):
+        Y = 0
+        Y += radians(elp25[i][5]) + elp25[i][0]*z1*T1 + elp25[i][1]*d11*T1 + elp25[i][2]*d21*T1 + elp25[i][3]*d31*T1 + elp25[i][4]*d41*T1
+        Y += elp25[i][0]*z2*T2 + elp25[i][1]*d12*T2 + elp25[i][2]*d22*T2 + elp25[i][3]*d32*T2 + elp25[i][4]*d42*T2
+        Xe += elp25[i][6]*T2*sin(Y)
+
+    elp26 = ELP200082B_ELP26
+    for i in range(len(elp26)):
+        Y = 0
+        Y += radians(elp26[i][5]) + elp26[i][0]*z1*T1 + elp26[i][1]*d11*T1 + elp26[i][2]*d21*T1 + elp26[i][3]*d31*T1 + elp26[i][4]*d41*T1
+        Y += elp26[i][0]*z2*T2 + elp26[i][1]*d12*T2 + elp26[i][2]*d22*T2 + elp26[i][3]*d32*T2 + elp26[i][4]*d42*T2
+        Ye += elp26[i][6]*T2*sin(Y)
+
+    elp27 = ELP200082B_ELP27
+    for i in range(len(elp27)):
+        Y = 0
+        Y += radians(elp27[i][5]) + elp27[i][0]*z1*T1 + elp27[i][1]*d11*T1 + elp27[i][2]*d21*T1 + elp27[i][3]*d31*T1 + elp27[i][4]*d41*T1
+        Y += elp27[i][0]*z2*T2 + elp27[i][1]*d12*T2 + elp27[i][2]*d22*T2 + elp27[i][3]*d32*T2 + elp27[i][4]*d42*T2
+        Ze += elp27[i][6]*T2*sin(Y)
+
+    elp28 = ELP200082B_ELP28
+    for i in range(len(elp28)):
+        Y = 0
+        Y += radians(elp28[i][5]) + elp28[i][0]*z1*T1 + elp28[i][1]*d11*T1 + elp28[i][2]*d21*T1 + elp28[i][3]*d31*T1 + elp28[i][4]*d41*T1
+        Y += elp28[i][0]*z2*T2 + elp28[i][1]*d12*T2 + elp28[i][2]*d22*T2 + elp28[i][3]*d32*T2 + elp28[i][4]*d42*T2
+        Xe += elp28[i][6]*sin(Y)
+
+    elp29 = ELP200082B_ELP29
+    for i in range(len(elp29)):
+        Y = 0
+        Y += radians(elp29[i][5]) + elp29[i][0]*z1*T1 + elp29[i][1]*d11*T1 + elp29[i][2]*d21*T1 + elp29[i][3]*d31*T1 + elp29[i][4]*d41*T1
+        Y += elp29[i][0]*z2*T2 + elp29[i][1]*d12*T2 + elp29[i][2]*d22*T2 + elp29[i][3]*d32*T2 + elp29[i][4]*d42*T2
+        Ye += elp29[i][6]*sin(Y)
+
+    elp30 = ELP200082B_ELP30
+    for i in range(len(elp30)):
+        Y = 0
+        Y += radians(elp30[i][5]) + elp30[i][0]*z1*T1 + elp30[i][1]*d11*T1 + elp30[i][2]*d21*T1 + elp30[i][3]*d31*T1 + elp30[i][4]*d41*T1
+        Y += elp30[i][0]*z2*T2 + elp30[i][1]*d12*T2 + elp30[i][2]*d22*T2 + elp30[i][3]*d32*T2 + elp30[i][4]*d42*T2
+        Ze += elp30[i][6]*sin(Y)
+
+    elp31 = ELP200082B_ELP31
+    for i in range(len(elp31)):
+        Y = 0
+        Y += radians(elp31[i][5]) + elp31[i][0]*z1*T1 + elp31[i][1]*d11*T1 + elp31[i][2]*d21*T1 + elp31[i][3]*d31*T1 + elp31[i][4]*d41*T1
+        Y += elp31[i][0]*z2*T2 + elp31[i][1]*d12*T2 + elp31[i][2]*d22*T2 + elp31[i][3]*d32*T2 + elp31[i][4]*d42*T2
+        Xe += elp31[i][6]*sin(Y)
+
+    elp32 = ELP200082B_ELP32
+    for i in range(len(elp32)):
+        Y = 0
+        Y += radians(elp32[i][5]) + elp32[i][0]*z1*T1 + elp32[i][1]*d11*T1 + elp32[i][2]*d21*T1 + elp32[i][3]*d31*T1 + elp32[i][4]*d41*T1
+        Y += elp32[i][0]*z2*T2 + elp32[i][1]*d12*T2 + elp32[i][2]*d22*T2 + elp32[i][3]*d32*T2 + elp32[i][4]*d42*T2
+        Ye += elp32[i][6]*sin(Y)
+    
+    elp33 = ELP200082B_ELP33
+    for i in range(len(elp33)):
+        Y = 0
+        Y += radians(elp33[i][5]) + elp33[i][0]*z1*T1 + elp33[i][1]*d11*T1 + elp33[i][2]*d21*T1 + elp33[i][3]*d31*T1 + elp33[i][4]*d41*T1
+        Y += elp33[i][0]*z2*T2 + elp33[i][1]*d12*T2 + elp33[i][2]*d22*T2 + elp33[i][3]*d32*T2 + elp33[i][4]*d42*T2
+        Ze += elp33[i][6]*sin(Y)
+
+    elp34 = ELP200082B_ELP34
+    for i in range(len(elp34)):
+        Y = 0
+        Y += radians(elp34[i][5]) + elp34[i][0]*z1*T1 + elp34[i][1]*d11*T1 + elp34[i][2]*d21*T1 + elp34[i][3]*d31*T1 + elp34[i][4]*d41*T1
+        Y += elp34[i][0]*z2*T2 + elp34[i][1]*d12*T2 + elp34[i][2]*d22*T2 + elp34[i][3]*d32*T2 + elp34[i][4]*d42*T2
+        Xe += elp34[i][6]*T3*sin(Y)
+
+    elp35 = ELP200082B_ELP35
+    for i in range(len(elp35)):
+        Y = 0
+        Y += radians(elp35[i][5]) + elp35[i][0]*z1*T1 + elp35[i][1]*d11*T1 + elp35[i][2]*d21*T1 + elp35[i][3]*d31*T1 + elp35[i][4]*d41*T1
+        Y += elp35[i][0]*z2*T2 + elp35[i][1]*d12*T2 + elp35[i][2]*d22*T2 + elp35[i][3]*d32*T2 + elp35[i][4]*d42*T2
+        Ye += elp35[i][6]*T3*sin(Y)
+
+    elp36 = ELP200082B_ELP36
+    for i in range(len(elp36)):
+        Y = 0
+        Y += radians(elp36[i][5]) + elp36[i][0]*z1*T1 + elp36[i][1]*d11*T1 + elp36[i][2]*d21*T1 + elp36[i][3]*d31*T1 + elp36[i][4]*d41*T1
+        Y += elp36[i][0]*z2*T2 + elp36[i][1]*d12*T2 + elp36[i][2]*d22*T2 + elp36[i][3]*d32*T2 + elp36[i][4]*d42*T2
+        Ze += elp36[i][6]*sin(Y)
+
+
+    Xe = Xe/rad + w[0][0] + w[0][1]*T2 + w[0][2]*T3 + w[0][3]*T4 + w[0][4]*T5
+    Ye = Ye/rad
+    Ze = Ze*a0/ath
+    X1 = Ze*cos(Ye)
+    X2 = X1*sin(Xe)
+    X1 = X1*cos(Xe)
+    X3 = Ze*sin(Ye)
+    pw = (p1 + p2*T2 + p3*T3 + p4*T4 + p5*T5)*T2
+    qw = (q1 + q2*T2 + q3*T3 + q4*T4 + q5*T5)*T2
+    RA = 2*sqrt(1 - pw*pw - qw*qw)
+    pwqw = 2*pw*qw
+    pw2 = 1 - 2*pw*pw
+    qw2 = 1 - 2*qw*qw
+    pw = pw*RA
+    qw = qw*RA
+    Xe = pw2*X1 + pwqw*X2 + pw*X3
+    Ye = pwqw*X1 + qw2*X2 - qw*X3
+    Ze = -pw*X1 + qw*X2 + (pw2 + qw2 - 1)*X3
+
+    return Xe, Ye, Ze
+
+
+
+
+
+jam = 0
+menit = 0
+detik = 0
+timezone = 0
+waktu = jam/24 + menit/1440 + detik/86400
+
+
+tahun = 1993
+bulan = 1
+tanggal = 13 + waktu
+lintang = (6, 57, 0, "LS")
+bujur = (107, 37, 0, "BT")
+jde = julian_datum(tahun, bulan, tanggal)
+x = ELP2000(jde)
+print(x)
+
 
 
 
