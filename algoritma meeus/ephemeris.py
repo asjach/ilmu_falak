@@ -1,5 +1,5 @@
 from math import cos
-from functions import dms_to_dec, jd, delta_t, print_hms
+from VSOP87_ELP2000.functions import dms_to_dec, jd, delta_t, print_hms
 from nutation import Nutation
 from moon import *
 from sun import *

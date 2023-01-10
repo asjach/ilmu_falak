@@ -1,5 +1,5 @@
 from math import radians, sin
-from functions import latitude_dec, longitude_dec, to_hms, julian_day
+from VSOP87_ELP2000.functions import latitude_dec, longitude_dec, to_hms, julian_day
 
 
 

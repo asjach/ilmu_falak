@@ -1,7 +1,7 @@
 # TEST ELP1
-from terms_vsop87_elp2000 import *
+from VSOP87_ELP2000.terms_vsop87_elp2000 import *
 from math import radians, cos, sin, atan, sqrt
-from khafid_fungsi import julian_ephemeris_day, julian_datum
+from VSOP87_ELP2000.khafid_fungsi import julian_ephemeris_day, julian_datum
 
 
 def ELP2000(tjj):

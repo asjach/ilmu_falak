@@ -1,8 +1,8 @@
 from functools import reduce
 from math import acos, asin, atan, atan2, cos, degrees, sin, radians, sqrt, tan
-from functions import dms_to_dec, print_dms
+from VSOP87_ELP2000.functions import dms_to_dec, print_dms
 from terms import terms_delta_psi, terms_delta_epsilon
-from terms_vsop87_elp2000 import*
+from VSOP87_ELP2000.terms_vsop87_elp2000 import*
 
 
 def julian_datum(year, month, day):

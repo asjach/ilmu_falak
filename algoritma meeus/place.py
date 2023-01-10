@@ -1,5 +1,5 @@
 from math import radians
-from functions import to_dms
+from VSOP87_ELP2000.functions import to_dms
 
 
 class Place:
